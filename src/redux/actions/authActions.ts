@@ -7,5 +7,5 @@ export const loginAction = (userCredentials: {
 });
 
 export const logoutAction = () => ({
-  type: 'LOGIN_SUCCESS',
+  type: 'LOGOUT_SUCCESS',
 });
