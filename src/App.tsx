@@ -2,6 +2,7 @@ import React from 'react';
 import LoginForm from './components/auth/LoginForm';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
+import Header from './components/ui/header/Header';
 
 const App: React.FC = () => {
   const isAuthenticated = useSelector(
@@ -10,7 +11,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>Weather app</h1>
+      <Header>Weather App</Header>
       <LoginForm />
     </div>
   );

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-// here comes types
-
 export const StyledInput = styled.input`
   width: 100%;
   padding: 10px;

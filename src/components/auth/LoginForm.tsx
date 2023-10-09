@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, logoutSucces } from '../../redux/slices/authSlice';
 import { RootState } from '../../redux/store';
-import { FormWrapper } from './styled';
+import { FormWrapper, ParagraphWrapper } from './styled';
 import Input from '../ui/input/Input';
 import Button from '../ui/button/Button';
+import { ButtonType } from '../ui/button/ButtonType';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
@@ -22,12 +24,36 @@ const LoginForm: React.FC = () => {
     dispatch(logoutSucces());
   };
 
+  const passwordValidation = (password: string) => {
+    const lengthRegex = /.{8,}/;
+    const capitalLetterRegex = /[A-Z]/;
+    const digitRegex = /\d/;
+    const specialCharacterRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+
+    console.log('Length Test:', lengthRegex.test(password));
+    console.log('Capital Letter Test:', capitalLetterRegex.test(password));
+    console.log('Digit Test:', digitRegex.test(password));
+    console.log(
+      'Special Character Test:',
+      specialCharacterRegex.test(password)
+    );
+
+    return (
+      lengthRegex.test(password) &&
+      capitalLetterRegex.test(password) &&
+      digitRegex.test(password) &&
+      specialCharacterRegex.test(password)
+    );
+  };
+
   return (
     <FormWrapper>
       {isAuthenticated ? (
         <div>
-          <p>Welcome, {email}</p>
-          <button onClick={handleLogout}>Logout</button>
+          <ParagraphWrapper>Welcome, {email}</ParagraphWrapper>
+          <Button type={ButtonType.Secondary} onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
       ) : (
         <div>
@@ -41,9 +67,26 @@ const LoginForm: React.FC = () => {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            onBlur={() => setIsPasswordValid(passwordValidation(password))}
           />
-          <Button onClick={handleLogin}>Login</Button>
+          {!isPasswordValid && password && (
+            <div style={{ color: 'black', padding: '5px' }}>
+              *Password must contain 8 characters, 1 capital letter, 1 number,
+              and 1 special character.
+            </div>
+          )}
+          <div style={{ textAlign: 'center' }}>
+            <Button
+              type={ButtonType.Primary}
+              onClick={handleLogin}
+              disabled={!passwordValidation}
+            >
+              Login
+            </Button>
+          </div>
         </div>
       )}
     </FormWrapper>
