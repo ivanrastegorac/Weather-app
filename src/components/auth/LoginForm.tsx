@@ -11,13 +11,20 @@ const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
   const dispatch = useDispatch();
 
   const handleLogin = () => {
-    dispatch(loginSuccess({ email }));
+    if (passwordValidation(password)) {
+      dispatch(loginSuccess({ email }));
+      setErrorMessage(null);
+    } else {
+      setErrorMessage('Invalid password!');
+    }
   };
 
   const handleLogout = () => {
@@ -29,14 +36,6 @@ const LoginForm: React.FC = () => {
     const capitalLetterRegex = /[A-Z]/;
     const digitRegex = /\d/;
     const specialCharacterRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
-
-    console.log('Length Test:', lengthRegex.test(password));
-    console.log('Capital Letter Test:', capitalLetterRegex.test(password));
-    console.log('Digit Test:', digitRegex.test(password));
-    console.log(
-      'Special Character Test:',
-      specialCharacterRegex.test(password)
-    );
 
     return (
       lengthRegex.test(password) &&
@@ -72,6 +71,9 @@ const LoginForm: React.FC = () => {
             }}
             onBlur={() => setIsPasswordValid(passwordValidation(password))}
           />
+          {errorMessage && (
+            <div style={{ color: 'red', padding: '5px' }}>{errorMessage}</div>
+          )}
           {!isPasswordValid && password && (
             <div style={{ color: 'black', padding: '5px' }}>
               *Password must contain 8 characters, 1 capital letter, 1 number,
