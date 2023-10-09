@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, logoutSucces } from '../../redux/slices/authSlice';
 import { RootState } from '../../redux/store';
-import { FormWrapper, ParagraphWrapper } from './styled';
+import { FormLabel, FormWrapper, ParagraphWrapper } from './styled';
 import Input from '../ui/input/Input';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
@@ -56,21 +56,30 @@ const LoginForm: React.FC = () => {
         </div>
       ) : (
         <div>
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            onBlur={() => setIsPasswordValid(passwordValidation(password))}
-          />
+          <div className="input-container">
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ marginTop: '5px' }}
+            />
+          </div>
+          <div className="input-container">
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              style={{ marginTop: '5px' }}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              onBlur={() => setIsPasswordValid(passwordValidation(password))}
+            />
+          </div>
+
           {errorMessage && (
             <div style={{ color: 'red', padding: '5px' }}>{errorMessage}</div>
           )}

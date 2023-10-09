@@ -11,7 +11,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Header>Weather App</Header>
+      <Header title="Weather App" subtitle="Weather Forecast by Zoran Vakula" />
       <LoginForm />
     </div>
   );
