@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, logoutSucces } from '../../redux/slices/authSlice';
 import { RootState } from '../../redux/store';
-import { FormLabel, FormWrapper, ParagraphWrapper } from './styled';
+import {
+  FormLabel,
+  FormWrapper,
+  LogInFormTitle,
+  ParagraphWrapper,
+} from './styled';
 import Input from '../ui/input/Input';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
+import { ErrorText, InputContainer } from '../ui/input/styled';
+import { useNavigate } from 'react-router';
+import WeatherPage from '../weather/WeatherPage';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -17,10 +25,12 @@ const LoginForm: React.FC = () => {
     (state: RootState) => state.auth.isAuthenticated
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (passwordValidation(password)) {
       dispatch(loginSuccess({ email }));
+      navigate('/weather');
       setErrorMessage(null);
     } else {
       setErrorMessage('Invalid password!');
@@ -49,15 +59,13 @@ const LoginForm: React.FC = () => {
     <FormWrapper>
       {isAuthenticated ? (
         <div>
-          <ParagraphWrapper>Welcome, {email}</ParagraphWrapper>
-          <Button type={ButtonType.Secondary} onClick={handleLogout}>
-            Logout
-          </Button>
+          <WeatherPage></WeatherPage>
         </div>
       ) : (
         <div>
-          <div className="input-container">
-            <FormLabel htmlFor="email">Email</FormLabel>
+          <LogInFormTitle>LOG IN TO SEE WEATHER FORECAST</LogInFormTitle>
+          <InputContainer>
+            <FormLabel htmlFor="email">EMAIL</FormLabel>
             <Input
               type="email"
               placeholder="Email"
@@ -65,9 +73,9 @@ const LoginForm: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               style={{ marginTop: '5px' }}
             />
-          </div>
-          <div className="input-container">
-            <FormLabel htmlFor="password">Password</FormLabel>
+          </InputContainer>
+          <InputContainer>
+            <FormLabel htmlFor="password">PASSWORD</FormLabel>
             <Input
               type="password"
               placeholder="Password"
@@ -78,17 +86,33 @@ const LoginForm: React.FC = () => {
               }}
               onBlur={() => setIsPasswordValid(passwordValidation(password))}
             />
-          </div>
+          </InputContainer>
+          <ErrorText>
+            {errorMessage && (
+              <div
+                style={{
+                  color: 'red',
+                  padding: '5px',
+                  fontFamily: 'sans-serif',
+                }}
+              >
+                {errorMessage}
+              </div>
+            )}
+            {!isPasswordValid && password && (
+              <div
+                style={{
+                  color: '#09578b',
+                  padding: '5px',
+                  fontFamily: 'sans-serif',
+                }}
+              >
+                Password must contain 8 characters, 1 capital letter, 1 number,
+                and 1 special character.
+              </div>
+            )}
+          </ErrorText>
 
-          {errorMessage && (
-            <div style={{ color: 'red', padding: '5px' }}>{errorMessage}</div>
-          )}
-          {!isPasswordValid && password && (
-            <div style={{ color: 'black', padding: '5px' }}>
-              *Password must contain 8 characters, 1 capital letter, 1 number,
-              and 1 special character.
-            </div>
-          )}
           <div style={{ textAlign: 'center' }}>
             <Button
               type={ButtonType.Primary}

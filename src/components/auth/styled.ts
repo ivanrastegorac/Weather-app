@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
 export const FormWrapper = styled.div`
-  background-image: url('background-image.avif');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #fff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -14,11 +10,22 @@ export const FormWrapper = styled.div`
   height: 85vh;
 `;
 
+export const LogInFormTitle = styled.h1`
+  color: #09578b;
+  font-size: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 10px;
+  padding-bottom: 30px;
+  font-weight: bold;
+`;
+
 export const ParagraphWrapper = styled.p`
   text-align: center;
 `;
 
 export const FormLabel = styled.label`
   font-weight: bold;
-  color: #2c445e;
+  color: #09578b;
+  padding-left: 8px;
+  font-family: Arial, Helvetica, sans-serif;
 `;

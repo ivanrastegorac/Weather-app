@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.header`
-  background-color: #007bff;
+  background-color: #09578b;
   color: #fff;
   padding: 20px 0;
   text-align: center;
@@ -14,7 +14,7 @@ export const IconWrapper = styled.div`
   margin-right: 10px;
 `;
 
-export const HeaderText = styled.h1`
+export const HeaderTitle = styled.h1`
   font-size: 28px;
   margin: 0;
   font-weight: bold;

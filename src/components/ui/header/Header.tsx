@@ -2,7 +2,7 @@ import React from 'react';
 import {
   HeaderStyle,
   HeaderSubtext,
-  HeaderText,
+  HeaderTitle,
   HeaderWrapper,
   IconWrapper,
 } from './style';
@@ -21,9 +21,9 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
         <IconWrapper>
           <FontAwesomeIcon icon={faSun} size="2x" />
         </IconWrapper>
-        <HeaderText>
+        <HeaderTitle>
           <span>{title}</span>
-        </HeaderText>
+        </HeaderTitle>
       </HeaderStyle>
 
       {subtitle && <HeaderSubtext>{subtitle}</HeaderSubtext>}
