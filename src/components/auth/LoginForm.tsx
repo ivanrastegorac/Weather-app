@@ -37,11 +37,12 @@ const LoginForm: React.FC = () => {
     dispatch(loginSuccess({ email }));
     navigate('/weather');
     setErrorMessage(null);
-  };
 
-  // const handleLogout = () => {
-  //   dispatch(logoutSucces());
-  // };
+    const currentDate = new Date().toISOString();
+    const token = email + currentDate;
+
+    localStorage.setItem('X-token', token);
+  };
 
   const passwordValidation = (password: string) => {
     const passwordRegex =
