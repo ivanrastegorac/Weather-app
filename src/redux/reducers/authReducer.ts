@@ -1,6 +1,10 @@
+interface User {
+  email: string;
+}
+
 interface AuthState {
   isAuthenticated: boolean;
-  user: { email: string } | null;
+  user: User | null;
 }
 
 const initialState: AuthState = {
@@ -17,11 +21,7 @@ const authReducer = (state = initialState, action: any) => {
         user: action.payload,
       };
     case 'LOGOUT_SUCCESS':
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-      };
+      return initialState;
     default:
       return state;
   }
