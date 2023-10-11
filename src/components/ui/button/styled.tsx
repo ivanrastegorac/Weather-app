@@ -18,3 +18,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
   font-size: 16px;
 `;
+
+export const ButtonWrapper = styled.div`
+  text-align: center;
+`;

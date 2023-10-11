@@ -11,9 +11,10 @@ import {
 import Input from '../ui/input/Input';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
-import { ErrorText, InputContainer } from '../ui/input/styled';
+import { ErrorText, InfoText, InputContainer } from '../ui/input/styled';
 import { useNavigate } from 'react-router';
 import WeatherPage from '../weather/WeatherPage';
+import { ButtonWrapper } from '../ui/button/styled';
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,31 +29,25 @@ const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (passwordValidation(password)) {
-      dispatch(loginSuccess({ email }));
-      navigate('/weather');
-      setErrorMessage(null);
-    } else {
+    if (!passwordValidation(password)) {
       setErrorMessage('Invalid password!');
+      return;
     }
+
+    dispatch(loginSuccess({ email }));
+    navigate('/weather');
+    setErrorMessage(null);
   };
 
-  const handleLogout = () => {
-    dispatch(logoutSucces());
-  };
+  // const handleLogout = () => {
+  //   dispatch(logoutSucces());
+  // };
 
   const passwordValidation = (password: string) => {
-    const lengthRegex = /.{8,}/;
-    const capitalLetterRegex = /[A-Z]/;
-    const digitRegex = /\d/;
-    const specialCharacterRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+    const passwordRegex =
+      /^(?=.*.{8,})(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])/;
 
-    return (
-      lengthRegex.test(password) &&
-      capitalLetterRegex.test(password) &&
-      digitRegex.test(password) &&
-      specialCharacterRegex.test(password)
-    );
+    return passwordRegex.test(password);
   };
 
   return (
@@ -71,7 +66,6 @@ const LoginForm: React.FC = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ marginTop: '5px' }}
             />
           </InputContainer>
           <InputContainer>
@@ -80,40 +74,21 @@ const LoginForm: React.FC = () => {
               type="password"
               placeholder="Password"
               value={password}
-              style={{ marginTop: '5px' }}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
               onBlur={() => setIsPasswordValid(passwordValidation(password))}
             />
           </InputContainer>
-          <ErrorText>
-            {errorMessage && (
-              <div
-                style={{
-                  color: 'red',
-                  padding: '5px',
-                  fontFamily: 'sans-serif',
-                }}
-              >
-                {errorMessage}
-              </div>
-            )}
-            {!isPasswordValid && password && (
-              <div
-                style={{
-                  color: '#09578b',
-                  padding: '5px',
-                  fontFamily: 'sans-serif',
-                }}
-              >
-                Password must contain 8 characters, 1 capital letter, 1 number,
-                and 1 special character.
-              </div>
-            )}
-          </ErrorText>
+          {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+          {!isPasswordValid && password && (
+            <InfoText>
+              Password must contain 8 characters, 1 capital letter, 1 number,
+              and 1 special character.
+            </InfoText>
+          )}
 
-          <div style={{ textAlign: 'center' }}>
+          <ButtonWrapper>
             <Button
               type={ButtonType.Primary}
               onClick={handleLogin}
@@ -121,7 +96,7 @@ const LoginForm: React.FC = () => {
             >
               Login
             </Button>
-          </div>
+          </ButtonWrapper>
         </div>
       )}
     </FormWrapper>

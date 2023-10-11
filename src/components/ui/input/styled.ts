@@ -6,6 +6,7 @@ export const StyledInput = styled.input`
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 18px;
+  margin-top: 5px;
 `;
 
 export const InputContainer = styled.div`
@@ -16,6 +17,14 @@ export const InputContainer = styled.div`
 
 export const ErrorText = styled.div`
   max-width: 100%;
-  color: black;
+  color: red;
+  font-family: sans-serif;
   padding: 5px;
+`;
+
+export const InfoText = styled.div`
+  max-width: 100%;
+  color: #09578b;
+  padding: 5px;
+  font-family: sans-serif;
 `;
