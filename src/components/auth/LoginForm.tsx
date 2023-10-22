@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginSuccess, logoutSucces } from '../../redux/slices/authSlice';
+import { loginSuccess } from '../../redux/slices/authSlice';
 import { RootState } from '../../redux/store';
-import {
-  FormLabel,
-  FormWrapper,
-  LogInFormTitle,
-  ParagraphWrapper,
-} from './styled';
+import { FormLabel, FormWrapper, LogInFormTitle } from './styled';
 import Input from '../ui/input/Input';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
@@ -27,6 +22,13 @@ const LoginForm: React.FC = () => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('X-token');
+    if (token) {
+      dispatch(loginSuccess({ email: '' }));
+    }
+  }, [dispatch]);
 
   const handleLogin = () => {
     if (!passwordValidation(password)) {
@@ -55,7 +57,7 @@ const LoginForm: React.FC = () => {
     <FormWrapper>
       {isAuthenticated ? (
         <div>
-          <WeatherPage></WeatherPage>
+          <WeatherPage />
         </div>
       ) : (
         <div>

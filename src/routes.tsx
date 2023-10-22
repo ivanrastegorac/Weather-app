@@ -1,17 +1,18 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import App from './App';
-import WeatherPage from './components/weather/WeatherPage';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import { Layout } from './components/Layout';
+import { LoggedInRoutes } from './components/auth/LoggedInRoutes';
+import { LoggedOutRoutes } from './components/auth/LoggedOutRoutes';
+import { useSelector } from 'react-redux';
+import { AuthState } from './redux/slices/authSlice';
 
-const RoutesComponent: React.FC = () => {
+const AppRouter = () => {
+  const isAuthenticated = useSelector(
+    (state: AuthState) => state.isAuthenticated
+  );
   return (
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/weather" element={<WeatherPage />} />
-    </Routes>
+    <Layout>
+      {isAuthenticated ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+    </Layout>
   );
 };
 
-export default RoutesComponent;
+export default AppRouter;
