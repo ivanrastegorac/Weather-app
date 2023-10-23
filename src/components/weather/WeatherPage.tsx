@@ -5,9 +5,8 @@ import { ButtonType } from '../ui/button/ButtonType';
 import { useDispatch } from 'react-redux';
 import { logoutSucces } from '../../redux/slices/authSlice';
 import { fetchWeather } from '../../services/weatherService';
-import Input from '../ui/input/Input';
 
-import { WeatherData, WeatherInfo } from './weatherTypes';
+import { WeatherData } from './weatherTypes';
 import { useNavigate } from 'react-router';
 
 const WeatherPage: React.FC = () => {

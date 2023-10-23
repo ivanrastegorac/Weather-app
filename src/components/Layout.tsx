@@ -1,7 +1,6 @@
 import React from 'react';
 import { PageLayout } from './styled';
 import Header from './ui/header/Header';
-import WeatherPage from './weather/WeatherPage';
 
 interface LayoutProps {
   children: React.ReactNode;
