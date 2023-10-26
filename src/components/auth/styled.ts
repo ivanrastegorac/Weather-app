@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const FormWrapper = styled.div`
   background-color: #fff;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +16,9 @@ export const LogInFormTitle = styled.h1`
   margin: 10px;
   padding-bottom: 30px;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 `;
 
 export const ParagraphWrapper = styled.p`

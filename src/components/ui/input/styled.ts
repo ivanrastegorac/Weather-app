@@ -13,13 +13,15 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  width: 50%;
 `;
 
 export const ErrorText = styled.div`
-  max-width: 100%;
+  max-width: 50%;
   color: red;
   font-family: sans-serif;
   padding: 5px;
+  margin-left: 20px;
 `;
 
 export const InfoText = styled.div`
