@@ -8,7 +8,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => (
   <PageLayout>
-    <Header title="title" />
+    <Header title="Welcome to Weather Forecast" />
     {children}
   </PageLayout>
 );

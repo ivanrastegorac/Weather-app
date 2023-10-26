@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const PageLayout = styled.div`
-  min-height: 100vh;
+  min-height: 95vh;
   align-items: center;
+  display: flex;
+  flex-direction: column;
 
   & > *:not(.full-width-container, footer) {
     padding-left: 1.2rem;

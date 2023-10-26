@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ParagraphWrapper } from '../auth/styled';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
 import { useDispatch } from 'react-redux';
 import { fetchWeather } from '../../services/weatherService';
-
 import { WeatherData } from './weatherTypes';
 import { useNavigate } from 'react-router';
 import { logoutSuccess } from '../../redux/slices/authSlice';
+import { TitleWrapper, WeatherWrapper } from './styled';
 
 const WeatherPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -53,20 +52,23 @@ const WeatherPage: React.FC = () => {
     navigate('/');
   };
 
+  const temperature = weatherData?.current.temp;
+  const location = weatherData?.timezone;
+  const weatherDescription = weatherData?.current?.weather[0]?.description;
+
   return (
-    <div>
-      <ParagraphWrapper>Welcome</ParagraphWrapper>
+    <WeatherWrapper>
       <div>
         {weatherData ? (
           <div>
-            <h2>Current Weather</h2>
+            <TitleWrapper>Current Weather</TitleWrapper>
             {weatherData.current ? (
-              <p>Temperature: {weatherData.current.temp}°C</p>
+              <p>Temperature: {temperature}°C</p>
             ) : (
               <p>Temperature data not available</p>
             )}
-            <p>Location: {weatherData.timezone}</p>
-            <p>Weather: {weatherData.current.toString()}</p>
+            <p>Location: {location}</p>
+            <p>Weather: {weatherDescription}</p>
           </div>
         ) : (
           <div>Loading weather data...</div>
@@ -75,7 +77,7 @@ const WeatherPage: React.FC = () => {
       <Button type={ButtonType.Secondary} onClick={handleLogout}>
         Logout
       </Button>
-    </div>
+    </WeatherWrapper>
   );
 };
 
