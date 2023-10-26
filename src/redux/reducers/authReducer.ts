@@ -1,11 +1,4 @@
-interface User {
-  email: string;
-}
-
-interface AuthState {
-  isAuthenticated: boolean;
-  user: User | null;
-}
+import { AuthState, loginSuccess, logoutSuccess } from '../slices/authSlice';
 
 const initialState: AuthState = {
   isAuthenticated: false,
@@ -14,13 +7,13 @@ const initialState: AuthState = {
 
 const authReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case 'LOGIN_SUCCESS':
+    case loginSuccess.type:
       return {
         ...state,
         isAuthenticated: true,
         user: action.payload,
       };
-    case 'LOGOUT_SUCCESS':
+    case logoutSuccess.type:
       return initialState;
     default:
       return state;

@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/authSlice';
-import RootState from './types';
+import authReducer from './reducers/authReducer';
 
 const store = configureStore({
   reducer: {
@@ -9,4 +8,3 @@ const store = configureStore({
 });
 
 export default store;
-export type { RootState };

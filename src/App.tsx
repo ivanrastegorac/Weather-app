@@ -1,20 +1,18 @@
-import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import WeatherPage from './components/weather/WeatherPage';
 import LoginForm from './components/auth/LoginForm';
-import { useSelector } from 'react-redux';
-import { RootState } from './redux/store';
-import Header from './components/ui/header/Header';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
-const App: React.FC = () => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
-
+const AppRouter = () => {
   return (
-    <div>
-      <Header title="Weather App" subtitle="Weather Forecast by Zoran Vakula" />
-      <LoginForm />
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginForm />} />
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/weather" element={<WeatherPage />} />
+      </Route>
+    </Routes>
   );
 };
 
-export default App;
+export default AppRouter;
