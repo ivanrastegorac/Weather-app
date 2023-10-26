@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { ButtonType } from './ButtonType';
 
 export interface StyledButtonProps {
-  buttonType: ButtonType;
+  buttontype: ButtonType;
   color?: string;
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${(props) =>
-    props.buttonType === ButtonType.Primary ? '#09578b' : '#be2424'};
+    props.buttontype === ButtonType.Primary ? '#09578b' : '#be2424'};
   color: ${(props) =>
-    props.buttonType === ButtonType.Primary ? '#fff' : '#fff'};
+    props.buttontype === ButtonType.Primary ? '#fff' : '#fff'};
   border: none;
   padding: 10px 20px;
   margin: 20px;

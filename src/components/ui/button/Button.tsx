@@ -27,7 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <StyledButton
       onClick={onClick}
-      buttonType={type}
+      buttontype={type}
       color={color}
       disabled={disabled}
       onKeyDown={handleKeyDown}
