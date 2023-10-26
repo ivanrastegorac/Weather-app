@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ReactNode } from 'react';
 
-const apiKey = process.env.API_KEY;
+const API_KEY = '2fd5ccd1fab6dcc6ec685dcec78345f7';
 const BASE_URL = 'https://api.openweathermap.org/data/3.0';
 
 export interface WeatherData {
@@ -24,7 +24,7 @@ interface WeatherInfo {
 export const fetchWeather = async (lat: number, lon: number) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${apiKey}`
+      `${BASE_URL}/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${API_KEY}`
     );
     return response.data;
   } catch (error) {

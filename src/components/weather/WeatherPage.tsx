@@ -1,13 +1,13 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ParagraphWrapper } from '../auth/styled';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
 import { useDispatch } from 'react-redux';
-import { logoutSucces } from '../../redux/slices/authSlice';
 import { fetchWeather } from '../../services/weatherService';
 
 import { WeatherData } from './weatherTypes';
 import { useNavigate } from 'react-router';
+import { logoutSuccess } from '../../redux/slices/authSlice';
 
 const WeatherPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const WeatherPage: React.FC = () => {
           const { latitude, longitude } = position.coords;
           fetchWeather(latitude, longitude)
             .then((data) => {
-              console.log('Weather Data:', data);
+              // console.log('Weather Data:', data);
               setWeatherData(data as WeatherData);
             })
 
@@ -49,7 +49,7 @@ const WeatherPage: React.FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('X-token');
-    dispatch(logoutSucces());
+    dispatch(logoutSuccess());
     navigate('/');
   };
 
