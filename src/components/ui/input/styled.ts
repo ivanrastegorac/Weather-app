@@ -16,6 +16,18 @@ export const InputContainer = styled.div`
   width: 50%;
 `;
 
+export const StyledSearch = styled.input`
+  
+  border: 1px solid #ccc;
+  border-radius: 18px;
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+`;
+
 export const ErrorText = styled.div`
   max-width: 50%;
   color: red;

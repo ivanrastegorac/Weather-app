@@ -19,6 +19,8 @@ export const HeaderTitle = styled.h1`
   font-size: 28px;
   margin: 0;
   font-weight: bold;
+  flex: 1; 
+  text-align: center;
 `;
 
 export const HeaderSubtext = styled.p`
@@ -28,7 +30,14 @@ export const HeaderSubtext = styled.p`
 
 export const HeaderStyle = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+`;
+
+export const LogoutButton = styled.button` 
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #6e8cc2;
+  color: white;
 `;
