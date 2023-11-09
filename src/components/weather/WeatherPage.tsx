@@ -1,38 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '../ui/button/Button';
 import { ButtonType } from '../ui/button/ButtonType';
-import { WeatherData, fetchLocalWeather, fetchWeather } from '../../services/weatherService';
-import { Info, RemoveButton, SaveButton, SavedCities, SavedCity, SearchContainer, SearchInput, TitleWrapper, WeatherContainer } from './styled';
-import { LocalWeatherData } from './weatherTypes';
+import { WeatherData, fetchWeather } from '../../services/weatherService';
+import { Info,  SaveButton, SearchContainer, SearchInput, WeatherContainer } from './styled';
+import CurrentWeather from './CurrentWeather';
+import WeatherByCity from './WeatherByCity';
 
 const WeatherPage: React.FC = () => {
 
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [localWeatherData, setLocalWeatherData] = useState<LocalWeatherData | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);  
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState('');
   const [savedCities, setSavedCities] = useState<WeatherData[]>([]);
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchLocalWeather(latitude, longitude)
-            .then((data) => {
-              setLocalWeatherData(data as LocalWeatherData);
-            })
-
-            .catch(() => setError(null));
-        },
-
-        () => setError('Geolocation is not available or denied.')
-      );
-    } else {
-      setError('Geolocation is not supported by your browser.');
-    }
-  }, []);
 
   const handleSearch = async () => {
     if (city) {
@@ -42,7 +22,6 @@ const WeatherPage: React.FC = () => {
         setWeatherData(data);
         setLoading(false);
         setCity('');
-        setLocalWeatherData(null);
         setError(null);
       } catch (error) {
         setError('Failed to fetch data');
@@ -58,11 +37,6 @@ const WeatherPage: React.FC = () => {
     return savedCities.some(savedCity => savedCity.name === city.name);
   };
 
-  const removeCity = (index: number) => {
-    const updatedCities = savedCities.filter((_, i) => i !== index);
-    setSavedCities(updatedCities);
-  };
-
   const saveCurrentCity = () => {
     if (weatherData) {
       if (isCityAlreadySaved(weatherData)) {
@@ -75,13 +49,6 @@ const WeatherPage: React.FC = () => {
     }
   };
 
- 
-
-  const temperature = localWeatherData?.current.clouds;
-  const location = localWeatherData?.timezone;
-  const weatherDescription = localWeatherData?.current?.weather[0]?.description;
-
-
   return (
     <WeatherContainer>
       <SearchContainer>
@@ -90,35 +57,13 @@ const WeatherPage: React.FC = () => {
           placeholder="Search city"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-        />
-        
+        /> 
         <Button type={ButtonType.Search} onClick={handleSearch}>
         Search
       </Button>
       </SearchContainer>
-      {localWeatherData && (
-  <div>
-    <TitleWrapper>Current Weather</TitleWrapper>
-    <Info>{location}</Info>
-    {localWeatherData?.current ? (
-      <Info>{temperature}°C</Info>
-    ) : (
-      <Info>Temperature data not available</Info>
-    )}
-    <Info>{weatherDescription}</Info>
-    <Info>
-      {localWeatherData.current.weather[0].icon && (
-        <p>
-          <img
-            src={`https://openweathermap.org/img/w/${localWeatherData.current.weather[0].icon}.png`}
-            alt="Local Weather Icon"
-          />
-        </p>
-      )}
-    </Info>
-  </div>
-)}
       
+      <CurrentWeather/>
       
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
@@ -134,6 +79,7 @@ const WeatherPage: React.FC = () => {
       alt="Weather Icon"
     /></p>
     )}
+
     <SaveButton onClick={saveCurrentCity}>
             Save City
           </SaveButton>
@@ -141,26 +87,9 @@ const WeatherPage: React.FC = () => {
       ) : (
        null
       )}
-      
-      
-      <SavedCities>
-        {savedCities.map((cityData, index) => (
-          <SavedCity key={index}>
-            <h2>{cityData.name}</h2>
-            <p> {cityData.main.temp} K</p>
-            <p>{cityData.weather[0].description}</p>
-            {cityData.weather[0].icon && (
-              <p>
-                <img
-                  src={`https://openweathermap.org/img/w/${cityData.weather[0].icon}.png`}
-                  alt="Weather Icon"
-                />
-              </p>
-            )}
-            <RemoveButton onClick={() => removeCity(index)}>Remove</RemoveButton>
-          </SavedCity>
-        ))}
-      </SavedCities>
+
+      <WeatherByCity savedCities={savedCities} setSavedCities={setSavedCities} />
+
     </WeatherContainer>
   );
 };
