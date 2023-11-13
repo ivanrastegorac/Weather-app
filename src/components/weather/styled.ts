@@ -64,7 +64,7 @@ export const SavedCities = styled.div`
 `;
 
 export const SavedCity = styled.div`
-  background-color: #e0e0e0;
+  background-color: white;
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
