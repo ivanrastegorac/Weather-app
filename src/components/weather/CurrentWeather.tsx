@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LocalWeatherData } from './weatherTypes';
 import { fetchLocalWeather } from '../../services/weatherService';
-import { Info, TitleWrapper } from './styled';
+import { CurrentWeatherStatus, CurrentWeatherWrapper, Info, InfoWrapper, SyledCityTitle, Temperature, TitleWrapper, WeatherDescription, WeatherIcon } from './styled';
 
 const CurrentWeather: React.FC = () => {
 
@@ -35,27 +35,31 @@ const CurrentWeather: React.FC = () => {
     const weatherDescription = localWeatherData?.current?.weather[0]?.description;
 
     return (
-        <div>
+        <CurrentWeatherWrapper>
             <TitleWrapper>Current Weather</TitleWrapper>
-            <Info>{location}</Info>
-            {localWeatherData?.current ? (
-                <Info>{temperature}°C</Info>
-            ) : (
-                <Info>Temperature data not available</Info>
-            )}
-            <Info>{weatherDescription}</Info>
-            <Info>
-                {localWeatherData.current.weather[0].icon && (
-                    <p>
-                        <img
-                            src={`https://openweathermap.org/img/w/${localWeatherData.current.weather[0].icon}.png`}
-                            alt="Local Weather Icon"
-                        />
-                    </p>
-                )}
-            </Info>
-            
-        </div>
+                <SyledCityTitle>{location}</SyledCityTitle>
+                    <CurrentWeatherStatus>
+                        <WeatherIcon>
+                             {localWeatherData.current.weather[0].icon && (
+                                 <p>
+                                    <img
+                                        src={`https://openweathermap.org/img/w/${localWeatherData.current.weather[0].icon}.png`}
+                                        alt="Local Weather Icon"
+                                    />
+                                </p>
+                            )}
+                        </WeatherIcon>
+
+                        <InfoWrapper>
+                            {localWeatherData?.current ? (
+                                <Temperature>{temperature}°C</Temperature>
+                                    ) : (
+                                        <Info>Temperature data not available</Info>
+                                    )}
+                        </InfoWrapper>
+                    </CurrentWeatherStatus>
+        <WeatherDescription>{weatherDescription}</WeatherDescription>
+    </CurrentWeatherWrapper>
     );
 };
 
