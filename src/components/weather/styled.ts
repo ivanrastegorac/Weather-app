@@ -1,9 +1,8 @@
-import styled from 'styled-components';
-import Button from '../ui/button/Button';
-import { StyledSearch } from '../ui/input/styled';
+import styled from "styled-components";
+import Button from "../ui/button/Button";
 
 export const WeatherContainer = styled.div`
-  background: linear-gradient(to top, #87CEFA, white);
+  background: linear-gradient(to top, #87cefa, white);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -12,9 +11,9 @@ export const WeatherContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto 1fr;
   grid-template-areas:
-    'header header'
-    'search search'
-    'cities weather';
+    "header header"
+    "search search"
+    "cities weather";
   height: 85vh;
   max-width: 800px;
   padding: 20px;
@@ -24,7 +23,7 @@ export const WeatherContainer = styled.div`
 `;
 
 export const TitleWrapper = styled.h6`
-  font-family: 'Verdana', sans-serif;
+  font-family: "Verdana", sans-serif;
   font-size: 24px;
   margin-bottom: 10px;
   font-weight: 500;
@@ -38,9 +37,12 @@ export const SearchContainer = styled.div`
   justify-content: center;
 `;
 
-export const SearchInput = styled(StyledSearch)`
-  width: 80%;
-  margin-right: 5px;
+export const SearchInput = styled.input`
+  width: 350px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  margin-right: 15px;
+  border-radius: 18px;
 `;
 
 export const SearchButton = styled(Button)`
@@ -96,8 +98,8 @@ export const CurrentWeatherWrapper = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin: auto;
-  width: 300px; 
-  height: 350px; 
+  width: 300px;
+  height: 350px;
   max-width: 800px;
   padding: 20px;
   display: flex;
@@ -119,21 +121,21 @@ export const CurrentWeatherStatus = styled.div`
 `;
 
 export const SyledCityTitle = styled.h4`
-font-family: 'Verdana', sans-serif;
+  font-family: "Verdana", sans-serif;
   font-size: 24px;
-   font-weight: 700;
-    font-size: 1.25rem;
-    color: #396bae;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #396bae;
 `;
 
 export const WeatherIcon = styled.div`
   margin: 16px 0;
-  
+
   & > p > img {
     max-width: 100%;
     height: auto;
-    width: 100px; 
-    height: 70px; 
+    width: 100px;
+    height: 70px;
   }
 `;
 
@@ -141,7 +143,7 @@ export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 16px; 
+  margin-left: 16px;
 
   @media (min-width: 600px) {
     align-items: flex-start;
@@ -150,7 +152,7 @@ export const InfoWrapper = styled.div`
 `;
 
 export const Temperature = styled(Info)`
-  font-size: 80px; 
+  font-size: 80px;
   color: #396bae;
 
   @media (min-width: 600px) {
@@ -159,7 +161,7 @@ export const Temperature = styled(Info)`
 `;
 
 export const WeatherDescription = styled(Info)`
-  font-family: 'Verdana', sans-serif;
+  font-family: "Verdana", sans-serif;
   font-size: 1.375rem;
   text-align: center;
   color: #7b98b2;

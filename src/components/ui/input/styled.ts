@@ -16,11 +16,6 @@ export const InputContainer = styled.div`
   max-width: 300px;
 `;
 
-export const StyledSearch = styled.input`
-  border: 1px solid #ccc;
-  border-radius: 18px;
-`;
-
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: row;
