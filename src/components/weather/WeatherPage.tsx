@@ -54,6 +54,8 @@ const WeatherPage: React.FC = () => {
     }
   };
 
+  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+
   return (
     <WeatherContainer>
       <SearchContainer>
@@ -81,7 +83,7 @@ const WeatherPage: React.FC = () => {
           {weatherData.weather[0].icon && (
             <p>
               <img
-                src={`https://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
+                src={`${OPEN_WEATHER_URL}${weatherData.weather[0].icon}.png`}
                 alt="Weather Icon"
               />
             </p>

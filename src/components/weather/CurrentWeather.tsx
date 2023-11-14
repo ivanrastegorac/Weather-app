@@ -1,66 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { LocalWeatherData } from './weatherTypes';
-import { fetchLocalWeather } from '../../services/weatherService';
-import { CurrentWeatherStatus, CurrentWeatherWrapper, Info, InfoWrapper, SyledCityTitle, Temperature, TitleWrapper, WeatherDescription, WeatherIcon } from './styled';
+import React, { useEffect, useState } from "react";
+import { LocalWeatherData } from "./weatherTypes";
+import { fetchLocalWeather } from "../../services/weatherService";
+import {
+  CurrentWeatherStatus,
+  CurrentWeatherWrapper,
+  Info,
+  InfoWrapper,
+  SyledCityTitle,
+  Temperature,
+  TitleWrapper,
+  WeatherDescription,
+  WeatherIcon,
+} from "./styled";
 
 const CurrentWeather: React.FC = () => {
+  const [localWeatherData, setLocalWeatherData] =
+    useState<LocalWeatherData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-    const [localWeatherData, setLocalWeatherData] = useState<LocalWeatherData | null>(null);
-    const [error, setError] = useState<string | null>(null);
-  
-    useEffect(() => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords;
-              fetchLocalWeather(latitude, longitude)
-                .then((data) => {
-                  setLocalWeatherData(data as LocalWeatherData);
-                })
-                .catch(() => setError(null));
-            },
-            () => setError('Geolocation is not available or denied.')
-          );
-        } else {
-          setError('Geolocation is not supported by your browser.');
-        }
-    }, []);
-
-    if (!localWeatherData) {
-        return null; 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchLocalWeather(latitude, longitude)
+            .then((data) => {
+              setLocalWeatherData(data as LocalWeatherData);
+            })
+            .catch(() => setError(null));
+        },
+        () => setError("Geolocation is not available or denied.")
+      );
+    } else {
+      setError("Geolocation is not supported by your browser.");
     }
+  }, []);
 
-    const temperature = localWeatherData?.current.clouds;
-    const location = localWeatherData?.timezone;
-    const weatherDescription = localWeatherData?.current?.weather[0]?.description;
+  if (!localWeatherData) {
+    return null;
+  }
 
-    return (
-        <CurrentWeatherWrapper>
-            <TitleWrapper>Current Weather</TitleWrapper>
-                <SyledCityTitle>{location}</SyledCityTitle>
-                    <CurrentWeatherStatus>
-                        <WeatherIcon>
-                             {localWeatherData.current.weather[0].icon && (
-                                 <p>
-                                    <img
-                                        src={`https://openweathermap.org/img/w/${localWeatherData.current.weather[0].icon}.png`}
-                                        alt="Local Weather Icon"
-                                    />
-                                </p>
-                            )}
-                        </WeatherIcon>
+  const temperature = localWeatherData?.current.clouds;
+  const location = localWeatherData?.timezone;
+  const weatherDescription = localWeatherData?.current?.weather[0]?.description;
+  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
 
-                        <InfoWrapper>
-                            {localWeatherData?.current ? (
-                                <Temperature>{temperature}°C</Temperature>
-                                    ) : (
-                                        <Info>Temperature data not available</Info>
-                                    )}
-                        </InfoWrapper>
-                    </CurrentWeatherStatus>
-        <WeatherDescription>{weatherDescription}</WeatherDescription>
+  return (
+    <CurrentWeatherWrapper>
+      <TitleWrapper>Current Weather</TitleWrapper>
+      <SyledCityTitle>{location}</SyledCityTitle>
+      <CurrentWeatherStatus>
+        <WeatherIcon>
+          {localWeatherData.current.weather[0].icon && (
+            <p>
+              <img
+                src={`${OPEN_WEATHER_URL}${localWeatherData.current.weather[0].icon}.png`}
+                alt="Local Weather Icon"
+              />
+            </p>
+          )}
+        </WeatherIcon>
+
+        <InfoWrapper>
+          {localWeatherData?.current ? (
+            <Temperature>{temperature}°C</Temperature>
+          ) : (
+            <Info>Temperature data not available</Info>
+          )}
+        </InfoWrapper>
+      </CurrentWeatherStatus>
+      <WeatherDescription>{weatherDescription}</WeatherDescription>
     </CurrentWeatherWrapper>
-    );
+  );
 };
 
 export default CurrentWeather;
