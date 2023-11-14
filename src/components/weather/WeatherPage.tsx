@@ -43,15 +43,18 @@ const WeatherPage: React.FC = () => {
   };
 
   const saveCurrentCity = () => {
-    if (weatherData) {
-      if (isCityAlreadySaved(weatherData)) {
-        alert("This city is already saved.");
-      } else if (savedCities.length >= 10) {
-        alert("You can save a maximum of 10 cities.");
-      } else {
-        setSavedCities([...savedCities, weatherData]);
-      }
+    if (!weatherData) {
+      return;
     }
+    if (isCityAlreadySaved(weatherData)) {
+      alert("This city is already saved.");
+      return;
+    }
+    if (savedCities.length >= 10) {
+      alert("You can save a maximum of 10 cities.");
+      return;
+    }
+    setSavedCities([...savedCities, weatherData]);
   };
 
   const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
