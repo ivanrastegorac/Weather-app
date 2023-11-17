@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { ReactNode } from 'react';
+import axios from "axios";
+import { ReactNode } from "react";
 
-const API_KEY = '2fd5ccd1fab6dcc6ec685dcec78345f7';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 export interface WeatherData {
   main: {
@@ -39,6 +39,6 @@ export const fetchWeather = async (city: string) => {
     );
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch data');
+    throw new Error("Failed to fetch data");
   }
 };
