@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 import {
   HeaderStyle,
   HeaderSubtext,
   HeaderTitle,
   HeaderWrapper,
   LogoutButton,
-} from './style';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { logoutSuccess } from '../../../redux/slices/authSlice';
+} from "./style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "../../../redux/slices/authSlice";
 
 interface HeaderProps {
   title: string;
@@ -22,9 +22,9 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('X-token');
+    localStorage.removeItem("X-token");
     dispatch(logoutSuccess());
-    navigate('/');
+    navigate("/");
   };
 
   return (

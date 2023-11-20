@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
-import RootState from '../../redux/types';
-import { Layout } from '../Layout';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
+import RootState from "../../redux/types";
+import { Layout } from "../Layout";
 
 const ProtectedRoute = () => {
   const isAuthenticated = useSelector(

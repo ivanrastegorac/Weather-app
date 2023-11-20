@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
   background-color: #09578b;
@@ -6,21 +6,21 @@ export const HeaderWrapper = styled.header`
   padding: 20px 0;
   border-color: red 5px;
   text-align: center;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   border-radius: 5px;
-`;
-
-export const IconWrapper = styled.div`
-  margin-bottom: 5px;
-  margin-right: 10px;
+  max-width: 800px;
 `;
 
 export const HeaderTitle = styled.h1`
   font-size: 28px;
   margin: 0;
   font-weight: bold;
-  flex: 1; 
+  flex: 1;
   text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 24px;
+  }
 `;
 
 export const HeaderSubtext = styled.p`
@@ -34,7 +34,7 @@ export const HeaderStyle = styled.div`
   justify-content: space-between;
 `;
 
-export const LogoutButton = styled.button` 
+export const LogoutButton = styled.button`
   padding: 8px 16px;
   border: none;
   border-radius: 4px;

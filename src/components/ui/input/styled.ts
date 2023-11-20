@@ -13,7 +13,8 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-  max-width: 300px;
+  width: 300px;
+  max-width: 50%;
 `;
 
 export const SearchContainer = styled.div`

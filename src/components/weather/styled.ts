@@ -20,6 +20,16 @@ export const WeatherContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "header"
+      "search"
+      "cities"
+      "weather";
+  }
 `;
 
 export const TitleWrapper = styled.h6`
@@ -62,7 +72,7 @@ export const LoadingText = styled.p`
 
 export const SavedCities = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
 `;
 
 export const SavedCity = styled.div`
@@ -105,6 +115,11 @@ export const CurrentWeatherWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* need this for later */
+  /* @media (min-width: 600px) {
+    width: 70%;
+  } */
 `;
 
 export const CurrentWeatherStatus = styled.div`

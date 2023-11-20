@@ -5,6 +5,7 @@ import { WeatherData, fetchWeather } from "../../services/weatherService";
 import {
   Info,
   SaveButton,
+  SavedCities,
   SearchContainer,
   SearchInput,
   WeatherContainer,
@@ -96,10 +97,15 @@ const WeatherPage: React.FC = () => {
         </Info>
       ) : null}
 
-      <WeatherByCity
-        savedCities={savedCities}
-        setSavedCities={setSavedCities}
-      />
+      <SavedCities>
+        {savedCities.map((city, index) => (
+          <WeatherByCity
+            key={index}
+            city={city}
+            setSavedCities={setSavedCities}
+          />
+        ))}
+      </SavedCities>
     </WeatherContainer>
   );
 };
