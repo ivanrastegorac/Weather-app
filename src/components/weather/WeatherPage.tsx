@@ -1,69 +1,111 @@
-import React, { useEffect, useState } from 'react';
-import Button from '../ui/button/Button';
-import { ButtonType } from '../ui/button/ButtonType';
-import { useDispatch } from 'react-redux';
-import { fetchWeather } from '../../services/weatherService';
-import { WeatherData } from './weatherTypes';
-import { useNavigate } from 'react-router';
-import { logoutSuccess } from '../../redux/slices/authSlice';
-import { Info, LoadingText, TitleWrapper, WeatherContainer } from './styled';
+import React, { useState } from "react";
+import Button from "../ui/button/Button";
+import { ButtonType } from "../ui/button/ButtonType";
+import { WeatherData, fetchWeather } from "../../services/weatherService";
+import {
+  Info,
+  SaveButton,
+  SavedCities,
+  SearchContainer,
+  SearchInput,
+  WeatherContainer,
+} from "./styled";
+import CurrentWeather from "./CurrentWeather";
+import WeatherByCity from "./WeatherByCity";
 
 const WeatherPage: React.FC = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState("");
+  const [savedCities, setSavedCities] = useState<WeatherData[]>([]);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          fetchWeather(latitude, longitude)
-            .then((data) => {
-              setWeatherData(data as WeatherData);
-            })
-
-            .catch(() => setError(null));
-        },
-
-        () => setError('Geolocation is not available or denied.')
-      );
+  const handleSearch = async () => {
+    if (city) {
+      setLoading(true);
+      try {
+        const data = await fetchWeather(city);
+        setWeatherData(data);
+        setLoading(false);
+        setCity("");
+        setError(null);
+      } catch (error) {
+        setError("Failed to fetch data");
+        setLoading(false);
+      }
     } else {
-      setError('Geolocation is not supported by your browser.');
+      setError("Please enter a city name.");
+      setWeatherData(null);
     }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('X-token');
-    dispatch(logoutSuccess());
-    navigate('/');
   };
 
-  const temperature = weatherData?.current.temp;
-  const location = weatherData?.timezone;
-  const weatherDescription = weatherData?.current?.weather[0]?.description;
+  const isCityAlreadySaved = (city: WeatherData) => {
+    return savedCities.some((savedCity) => savedCity.name === city.name);
+  };
+
+  const saveCurrentCity = () => {
+    if (!weatherData) {
+      return;
+    }
+    if (isCityAlreadySaved(weatherData)) {
+      alert("This city is already saved.");
+      return;
+    }
+    if (savedCities.length >= 10) {
+      alert("You can save a maximum of 10 cities.");
+      return;
+    }
+    setSavedCities([...savedCities, weatherData]);
+  };
+
+  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
 
   return (
     <WeatherContainer>
-      {weatherData ? (
-        <div>
-          <TitleWrapper>Current Weather</TitleWrapper>
-          {weatherData.current ? (
-            <Info>Temperature: {temperature}°C</Info>
-          ) : (
-            <Info>Temperature data not available</Info>
+      <SearchContainer>
+        <SearchInput
+          type="search"
+          placeholder="Search city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <Button type={ButtonType.Search} onClick={handleSearch}>
+          Search
+        </Button>
+      </SearchContainer>
+
+      <CurrentWeather />
+
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
+      {weatherData && weatherData.main ? (
+        <Info>
+          <h2>{weatherData.name}</h2>
+          <p>Temperature: {weatherData.main.temp} K</p>
+          <p>Description: {weatherData.weather[0].description}</p>
+          {weatherData.weather[0].icon && (
+            <p>
+              <img
+                src={`${OPEN_WEATHER_URL}${weatherData.weather[0].icon}.png`}
+                alt="Weather Icon"
+              />
+            </p>
           )}
-          <Info>Location: {location}</Info>
-          <Info>Weather: {weatherDescription}</Info>
-        </div>
-      ) : (
-        <LoadingText>Loading weather data...</LoadingText>
-      )}
-      <Button type={ButtonType.Secondary} onClick={handleLogout}>
-        Logout
-      </Button>
+
+          <SaveButton onClick={saveCurrentCity}>Save City</SaveButton>
+        </Info>
+      ) : null}
+
+      <SavedCities>
+        {savedCities.map((city, index) => (
+          <WeatherByCity
+            key={index}
+            city={city}
+            setSavedCities={setSavedCities}
+          />
+        ))}
+      </SavedCities>
     </WeatherContainer>
   );
 };

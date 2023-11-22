@@ -1,13 +1,16 @@
-import React from 'react';
+import React from "react";
 import {
   HeaderStyle,
   HeaderSubtext,
   HeaderTitle,
   HeaderWrapper,
-  IconWrapper,
-} from './style';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun } from '@fortawesome/free-solid-svg-icons';
+  LogoutButton,
+} from "./style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { logoutSuccess } from "../../../redux/slices/authSlice";
 
 interface HeaderProps {
   title: string;
@@ -15,15 +18,24 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("X-token");
+    dispatch(logoutSuccess());
+    navigate("/");
+  };
+
   return (
     <HeaderWrapper>
       <HeaderStyle>
-        <IconWrapper>
-          <FontAwesomeIcon icon={faSun} size="2x" />
-        </IconWrapper>
         <HeaderTitle>
           <span>{title}</span>
         </HeaderTitle>
+        <LogoutButton type="button" onClick={handleLogout}>
+          <FontAwesomeIcon icon={faSignOutAlt} />
+        </LogoutButton>
       </HeaderStyle>
 
       {subtitle && <HeaderSubtext>{subtitle}</HeaderSubtext>}

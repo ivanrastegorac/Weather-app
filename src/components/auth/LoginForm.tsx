@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginSuccess } from '../../redux/slices/authSlice';
-import { FormLabel, FormWrapper, LogInFormTitle } from './styled';
-import Input from '../ui/input/Input';
-import Button from '../ui/button/Button';
-import { ButtonType } from '../ui/button/ButtonType';
-import { ErrorText, InputContainer } from '../ui/input/styled';
-import { useNavigate } from 'react-router';
-import { ButtonWrapper } from '../ui/button/styled';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/slices/authSlice";
+import { FormLabel, FormWrapper, LogInFormTitle } from "./styled";
+import Input from "../ui/input/Input";
+import Button from "../ui/button/Button";
+import { ButtonType } from "../ui/button/ButtonType";
+import { ErrorText, InputContainer } from "../ui/input/styled";
+import { useNavigate } from "react-router";
+import { ButtonWrapper } from "../ui/button/styled";
 
 const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const dispatch = useDispatch();
@@ -20,18 +20,18 @@ const LoginForm: React.FC = () => {
   const handleLogin = () => {
     if (!passwordValidation(password)) {
       setErrorMessage(
-        'Invalid password! Password must contain 8 characters, 1 capital letter, 1 number, and 1 special character.'
+        "Invalid password! Password must contain 8 characters, 1 capital letter, 1 number, and 1 special character."
       );
       return;
     }
     dispatch(loginSuccess({ email: email }));
-    navigate('/weather');
+    navigate("/weather");
     setErrorMessage(null);
 
     const currentDate = new Date().toISOString();
     const token = email + currentDate;
 
-    localStorage.setItem('X-token', token);
+    localStorage.setItem("X-token", token);
   };
 
   const passwordValidation = (password: string) => {

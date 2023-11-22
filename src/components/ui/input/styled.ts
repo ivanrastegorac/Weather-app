@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledInput = styled.input`
   width: 100%;
@@ -13,7 +13,14 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-  width: 50%;
+  width: 300px;
+  max-width: 50%;
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
 `;
 
 export const ErrorText = styled.div`
