@@ -1,6 +1,7 @@
 import React from "react";
 import { RemoveButton, SavedCity } from "./styled";
 import { WeatherData } from "../../services/weatherService";
+import { Link } from "react-router-dom";
 
 interface WeatherByCityProps {
   city: WeatherData;
@@ -21,7 +22,7 @@ const WeatherByCity: React.FC<WeatherByCityProps> = ({
 
   return (
     <SavedCity>
-      <h2>{city.name}</h2>
+      <Link to={`/${city.name}`}>{city.name}</Link>
       <p>{city.main.temp} K</p>
       <p>{city.weather[0].description}</p>
       {city.weather[0].icon && (

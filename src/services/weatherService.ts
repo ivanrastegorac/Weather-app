@@ -21,6 +21,19 @@ interface WeatherInfo {
   icon: string;
 }
 
+interface CityForecast {
+  list: ApiForecastItem[];
+}
+
+interface ApiForecastItem {
+  dt: number;
+  main: {
+    temp_min: number;
+    temp_max: number;
+  };
+  weather: WeatherInfo[];
+}
+
 export const fetchLocalWeather = async (lat: number, lon: number) => {
   try {
     const response = await axios.get(
@@ -40,5 +53,35 @@ export const fetchWeather = async (city: string) => {
     return response.data;
   } catch (error) {
     throw new Error("Failed to fetch data");
+  }
+};
+
+export const fetchCityForecast = async (city: string) => {
+  try {
+    const response = await axios.get<CityForecast>(
+      `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}`
+    );
+
+    const groupedData: Record<string, ApiForecastItem[]> = {};
+    response.data.list.forEach((item) => {
+      const day = new Date(item.dt * 1000).toLocaleDateString("en-US", {
+        weekday: "short",
+      });
+      if (!groupedData[day]) {
+        groupedData[day] = [];
+      }
+      groupedData[day].push(item);
+    });
+    const result = Object.entries(groupedData).map(([day, items]) => ({
+      dayName: day,
+      minTemp: Math.min(...items.map((item) => item.main.temp_min)),
+      maxTemp: Math.max(...items.map((item) => item.main.temp_max)),
+      weatherIcon: items[0].weather[0].icon,
+      weatherDescription: items[0].weather[0].description,
+    }));
+
+    return result;
+  } catch (error) {
+    throw error;
   }
 };
