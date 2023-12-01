@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCityForecast } from "../../services/weatherService";
+import {
+  ForecastContainer,
+  ForecastHeader,
+  ForecastItem,
+  DayName,
+  TemperatureWrapper,
+  MinTemperature,
+  MaxTemperature,
+  ResponsiveForecastList,
+  WeatherImage,
+} from "./styled";
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 interface ForecastItem {
   dayName: string;
   minTemp: number;
@@ -13,6 +25,7 @@ interface ForecastItem {
 const CityForecast: React.FC = () => {
   const { cityName } = useParams<{ cityName?: string }>();
   const [forecastData, setForecastData] = useState<ForecastItem[]>([]);
+  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,25 +44,26 @@ const CityForecast: React.FC = () => {
   }, [cityName]);
 
   return (
-    <div>
-      <h2>{cityName} 5-Day Forecast</h2>
-      <ul>
+    <ForecastContainer>
+      <ForecastHeader>{cityName} 5-Day Forecast</ForecastHeader>
+      <ResponsiveForecastList>
         {forecastData.map((item, index) => (
-          <li key={index}>
-            <p>{item.dayName}</p>
-            <p>Min Temperature: {item.minTemp} °C</p>
-            <p>Max Temperature: {item.maxTemp} °C</p>
-            <p>Description: {item.weatherDescription}</p>
+          <ForecastItem key={index}>
+            <DayName>{item.dayName}</DayName>
             {item.weatherIcon && (
-              <img
-                src={`https://openweathermap.org/img/w/${item.weatherIcon}.png`}
+              <WeatherImage
+                src={`${OPEN_WEATHER_URL}${item.weatherIcon}.png`}
                 alt="Weather Icon"
               />
             )}
-          </li>
+            <TemperatureWrapper>
+              <MinTemperature>{item.minTemp} °</MinTemperature>
+              <MaxTemperature>{item.maxTemp} °</MaxTemperature>
+            </TemperatureWrapper>
+          </ForecastItem>
         ))}
-      </ul>
-    </div>
+      </ResponsiveForecastList>
+    </ForecastContainer>
   );
 };
 
