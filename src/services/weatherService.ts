@@ -7,6 +7,14 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5";
 export interface WeatherData {
   main: {
     temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  wind: {
+    speed: number;
   };
   name: string;
   sys: {

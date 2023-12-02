@@ -4,9 +4,7 @@ import { ButtonType } from "../ui/button/ButtonType";
 import { WeatherData, fetchWeather } from "../../services/weatherService";
 import {
   ErrorText,
-  Info,
   LoadingText,
-  SaveButton,
   SavedCities,
   SearchContainer,
   SearchInput,
@@ -14,6 +12,7 @@ import {
 } from "./styled";
 import CurrentWeather from "./CurrentWeather";
 import WeatherByCity from "./WeatherByCity";
+import WeatherInfo from "./WeatherInfo";
 
 const WeatherPage: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -60,8 +59,6 @@ const WeatherPage: React.FC = () => {
     setSavedCities([...savedCities, weatherData]);
   };
 
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
-
   return (
     <WeatherContainer>
       <SearchContainer>
@@ -76,27 +73,16 @@ const WeatherPage: React.FC = () => {
         </Button>
       </SearchContainer>
 
-      <CurrentWeather />
+      {!weatherData && <CurrentWeather />}
 
       {loading && <LoadingText>Loading...</LoadingText>}
       {error && <ErrorText>{error}</ErrorText>}
 
       {weatherData && weatherData.main ? (
-        <Info>
-          <h2>{weatherData.name}</h2>
-          <p>Temperature: {weatherData.main.temp} K</p>
-          <p>Description: {weatherData.weather[0].description}</p>
-          {weatherData.weather[0].icon && (
-            <p>
-              <img
-                src={`${OPEN_WEATHER_URL}${weatherData.weather[0].icon}.png`}
-                alt="Weather Icon"
-              />
-            </p>
-          )}
-
-          <SaveButton onClick={saveCurrentCity}>Save City</SaveButton>
-        </Info>
+        <WeatherInfo
+          weatherData={weatherData}
+          saveCurrentCity={saveCurrentCity}
+        />
       ) : null}
 
       <SavedCities>

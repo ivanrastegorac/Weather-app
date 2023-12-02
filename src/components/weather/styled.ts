@@ -43,7 +43,6 @@ export const WeatherContainer = styled(Container)`
 
 export const Title = styled.h6`
   font-family: "Verdana", sans-serif;
-  font-size: 24px;
   margin-bottom: 10px;
   font-weight: 500;
   font-size: 1.125rem;
@@ -124,11 +123,12 @@ export const SaveButton = styled.button`
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  position: absolute;
 `;
 
 // CurrentWeather styles
 
-export const CurrentWeatherWrapper = styled(Container)`
+export const LocalWeatherWrapper = styled(Container)`
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -142,6 +142,111 @@ export const CurrentWeatherWrapper = styled(Container)`
   align-items: center;
 `;
 
+export const WeatherInfoWrapper = styled.div`
+  align-items: center;
+`;
+
+export const WeatherDetailLabel = styled.span`
+  color: #8c8c8c;
+  margin-right: 0.5rem;
+`;
+
+export const WeatherDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 1rem;
+  margin-left: 2rem;
+`;
+
+export const WeatherDetailItem = styled.div`
+  text-align: left;
+  margin-top: 0.8rem;
+  > svg {
+    margin-right: 0.9rem;
+    color: #8c8c8c;
+  }
+`;
+
+export const FeelsLike = styled(WeatherDetailItem)`
+  font-size: 1.25rem;
+  color: #7b98b2;
+`;
+
+export const HighLowContainer = styled.div`
+  display: flex;
+  margin-bottom: 2rem;
+`;
+
+export const Temp = styled(WeatherDetailItem)`
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: #3a86ca;
+`;
+
+export const Humidity = styled(WeatherDetailItem)`
+  font-size: 1.25rem;
+  color: #396bae;
+`;
+
+export const Wind = styled(WeatherDetailItem)`
+  font-size: 1.25rem;
+  color: #396bae;
+`;
+
+export const Pressure = styled(WeatherDetailItem)`
+  font-size: 1.25rem;
+  color: #396bae;
+`;
+
+export const SearchedWeatherWrapper = styled(Container)`
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 900px;
+  height: 350px;
+  max-width: 800px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+
+  ${SaveButton} {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  ${WeatherInfoWrapper} {
+    margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
+    max-width: none;
+  }
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    width: 80%;
+    max-width: none;
+  }
+
+  @media (min-width: 901px) {
+    width: 70%;
+    max-width: none;
+  }
+
+  @media (max-width: 829px) {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+    height: auto;
+  }
+`;
+
 export const CurrentWeatherStatus = styled(Container)`
   display: flex;
   flex-direction: row;
@@ -150,14 +255,13 @@ export const CurrentWeatherStatus = styled(Container)`
   width: 25rem;
 
   @media (min-width: 600px) {
-    flex-direction: row;
     align-items: center;
   }
 `;
 
 export const TitleWrapper = styled(Title)`
   font-family: "Verdana", sans-serif;
-  font-size: 24px;
+  font-size: 1.25rem;
   margin-bottom: 10px;
   font-weight: 500;
 `;
@@ -216,7 +320,7 @@ export const WeatherDescription = styled(Paragraph)`
   color: #7b98b2;
 
   @media (min-width: 600px) {
-    text-align: left;
+    text-align: center;
   }
 `;
 

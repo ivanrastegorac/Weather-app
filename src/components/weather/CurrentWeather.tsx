@@ -3,7 +3,7 @@ import { LocalWeatherData } from "./weatherTypes";
 import { fetchLocalWeather } from "../../services/weatherService";
 import {
   CurrentWeatherStatus,
-  CurrentWeatherWrapper,
+  LocalWeatherWrapper,
   Info,
   InfoWrapper,
   StyledCityTitle,
@@ -47,7 +47,7 @@ const CurrentWeather: React.FC = () => {
   const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
 
   return (
-    <CurrentWeatherWrapper>
+    <LocalWeatherWrapper>
       <TitleWrapper>Current Weather</TitleWrapper>
       <StyledCityTitle>{location}</StyledCityTitle>
       <CurrentWeatherStatus>
@@ -71,7 +71,7 @@ const CurrentWeather: React.FC = () => {
         </InfoWrapper>
       </CurrentWeatherStatus>
       <WeatherDescription>{weatherDescription}</WeatherDescription>
-    </CurrentWeatherWrapper>
+    </LocalWeatherWrapper>
   );
 };
 
