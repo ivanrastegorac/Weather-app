@@ -3,7 +3,9 @@ import Button from "../ui/button/Button";
 import { ButtonType } from "../ui/button/ButtonType";
 import { WeatherData, fetchWeather } from "../../services/weatherService";
 import {
+  ErrorText,
   Info,
+  LoadingText,
   SaveButton,
   SavedCities,
   SearchContainer,
@@ -76,8 +78,8 @@ const WeatherPage: React.FC = () => {
 
       <CurrentWeather />
 
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {loading && <LoadingText>Loading...</LoadingText>}
+      {error && <ErrorText>{error}</ErrorText>}
 
       {weatherData && weatherData.main ? (
         <Info>

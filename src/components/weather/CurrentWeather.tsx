@@ -6,7 +6,7 @@ import {
   CurrentWeatherWrapper,
   Info,
   InfoWrapper,
-  SyledCityTitle,
+  StyledCityTitle,
   Temperature,
   TitleWrapper,
   WeatherDescription,
@@ -49,7 +49,7 @@ const CurrentWeather: React.FC = () => {
   return (
     <CurrentWeatherWrapper>
       <TitleWrapper>Current Weather</TitleWrapper>
-      <SyledCityTitle>{location}</SyledCityTitle>
+      <StyledCityTitle>{location}</StyledCityTitle>
       <CurrentWeatherStatus>
         <WeatherIcon>
           {localWeatherData.current.weather[0].icon && (

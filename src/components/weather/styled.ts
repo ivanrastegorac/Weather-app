@@ -54,6 +54,23 @@ export const Paragraph = styled.p`
   margin: 8px 0;
 `;
 
+export const Info = styled(Paragraph)`
+  font-size: 18px;
+  margin: 8px 0;
+`;
+
+export const LoadingText = styled.p`
+  font-size: 20px;
+  margin-top: 20px;
+  font-style: italic;
+`;
+
+export const ErrorText = styled.p`
+  font-size: 20px;
+  color: red;
+  margin-top: 20px;
+`;
+
 // Search styles
 
 export const SearchContainer = styled(Container)`
@@ -138,12 +155,30 @@ export const CurrentWeatherStatus = styled(Container)`
   }
 `;
 
+export const TitleWrapper = styled(Title)`
+  font-family: "Verdana", sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 500;
+`;
+
 export const StyledCityTitle = styled.h4`
   font-family: "Verdana", sans-serif;
   font-size: 24px;
   font-weight: 700;
   font-size: 1.25rem;
   color: #396bae;
+`;
+
+export const WeatherIcon = styled.div`
+  margin: 16px 0;
+
+  & > p > img {
+    max-width: 100%;
+    height: auto;
+    width: 100px;
+    height: 70px;
+  }
 `;
 
 export const WeatherImage = styled.img`
