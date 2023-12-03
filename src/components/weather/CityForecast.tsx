@@ -7,10 +7,9 @@ import {
   ForecastItem,
   DayName,
   TemperatureWrapper,
-  MinTemperature,
-  MaxTemperature,
   ResponsiveForecastList,
   WeatherImage,
+  DayTemp,
 } from "./styled";
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
@@ -57,8 +56,8 @@ const CityForecast: React.FC = () => {
               />
             )}
             <TemperatureWrapper>
-              <MinTemperature>{item.minTemp} °</MinTemperature>
-              <MaxTemperature>{item.maxTemp} °</MaxTemperature>
+              <DayTemp>{item.minTemp} °C</DayTemp>
+              <DayTemp>{item.maxTemp} °C</DayTemp>
             </TemperatureWrapper>
           </ForecastItem>
         ))}

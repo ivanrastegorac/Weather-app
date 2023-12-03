@@ -367,15 +367,11 @@ export const TemperatureWrapper = styled(Container)`
   align-items: center;
 `;
 
-export const MinTemperature = styled(Paragraph)`
+export const DayTemp = styled(Paragraph)`
   margin: 0;
   margin-right: 12px;
   font-size: 1.2em;
   font-family: "Verdana", sans-serif;
-`;
-
-export const MaxTemperature = styled(Paragraph)`
-  margin: 0;
 `;
 
 export const ResponsiveForecastList = styled(ForecastList)`
