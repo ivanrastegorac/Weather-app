@@ -170,6 +170,10 @@ export const WeatherDetailItem = styled.div`
 export const FeelsLike = styled(WeatherDetailItem)`
   font-size: 1.25rem;
   color: #7b98b2;
+
+  > span {
+    margin-right: 10px;
+  }
 `;
 
 export const HighLowContainer = styled.div`
@@ -183,6 +187,11 @@ export const Temp = styled(WeatherDetailItem)`
   font-weight: 500;
   font-size: 1.25rem;
   color: #3a86ca;
+  margin-right: 15px;
+
+  > span {
+    margin-right: 5px;
+  }
 `;
 
 export const Humidity = styled(WeatherDetailItem)`

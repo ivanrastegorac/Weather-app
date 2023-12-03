@@ -65,17 +65,18 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
       </WeatherInfoWrapper>
       <WeatherDetails>
         <FeelsLike>
-          Feels Like
+          <span>Feels Like</span>
           {weatherData.main.feels_like}°C
         </FeelsLike>
         <HighLowContainer>
           <Temp>
             <FontAwesomeIcon icon={faArrowUp} />
-            {weatherData.main.temp_max}°C
+            <span>{weatherData.main.temp_max}°C</span>
           </Temp>
+          {""}
           <Temp>
             <FontAwesomeIcon icon={faArrowDown} />
-            {weatherData.main.temp_min}°C
+            <span>{weatherData.main.temp_min}°C</span>
           </Temp>
         </HighLowContainer>
 
