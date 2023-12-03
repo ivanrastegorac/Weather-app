@@ -75,8 +75,8 @@ export const ErrorText = styled.p`
 export const SearchContainer = styled(Container)`
   display: flex;
   width: 100%;
-  margin-bottom: 20px;
   justify-content: center;
+  align-items: flex-start;
 `;
 
 export const SearchInput = styled.input`

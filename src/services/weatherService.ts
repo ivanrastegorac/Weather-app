@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ReactNode } from "react";
+import { kelvinToCelsius } from "../components/weather/Temperature";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
@@ -53,12 +54,24 @@ export const fetchLocalWeather = async (lat: number, lon: number) => {
   }
 };
 
-export const fetchWeather = async (city: string) => {
+export const fetchWeather = async (city: string): Promise<WeatherData> => {
   try {
     const response = await axios.get(
       `${BASE_URL}/weather?q=${city}&appid=${API_KEY}`
     );
-    return response.data;
+
+    const weatherDataInCelsius: WeatherData = {
+      ...response.data,
+      main: {
+        ...response.data.main,
+        temp: kelvinToCelsius(response.data.main.temp),
+        feels_like: kelvinToCelsius(response.data.main.feels_like),
+        temp_min: kelvinToCelsius(response.data.main.temp_min),
+        temp_max: kelvinToCelsius(response.data.main.temp_max),
+      },
+    };
+
+    return weatherDataInCelsius;
   } catch (error) {
     throw new Error("Failed to fetch data");
   }
@@ -70,8 +83,19 @@ export const fetchCityForecast = async (city: string) => {
       `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}`
     );
 
+    const forecastDataInCelsius = response.data.list.map(
+      (item: ApiForecastItem) => ({
+        ...item,
+        main: {
+          ...item.main,
+          temp_min: kelvinToCelsius(item.main.temp_min),
+          temp_max: kelvinToCelsius(item.main.temp_max),
+        },
+      })
+    );
+
     const groupedData: Record<string, ApiForecastItem[]> = {};
-    response.data.list.forEach((item) => {
+    forecastDataInCelsius.forEach((item) => {
       const day = new Date(item.dt * 1000).toLocaleDateString("en-US", {
         weekday: "short",
       });
@@ -80,6 +104,7 @@ export const fetchCityForecast = async (city: string) => {
       }
       groupedData[day].push(item);
     });
+
     const result = Object.entries(groupedData).map(([day, items]) => ({
       dayName: day,
       minTemp: Math.min(...items.map((item) => item.main.temp_min)),

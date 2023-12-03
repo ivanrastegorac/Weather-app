@@ -23,7 +23,7 @@ const WeatherByCity: React.FC<WeatherByCityProps> = ({
   return (
     <SavedCity>
       <Link to={`/${city.name}`}>{city.name}</Link>
-      <p>{city.main.temp} K</p>
+      <p>{city.main.temp} °C</p>
       <p>{city.weather[0].description}</p>
       {city.weather[0].icon && (
         <p>
