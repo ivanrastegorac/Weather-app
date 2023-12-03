@@ -266,12 +266,11 @@ export const TitleWrapper = styled(Title)`
   font-weight: 500;
 `;
 
-export const StyledCityTitle = styled.h4`
+export const StyledCityTitle = styled.h1`
   font-family: "Verdana", sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 42px;
   color: #396bae;
+  text-align: center;
 `;
 
 export const WeatherIcon = styled.div`
@@ -316,7 +315,6 @@ export const Temperature = styled(Paragraph)`
 export const WeatherDescription = styled(Paragraph)`
   font-family: "Verdana", sans-serif;
   font-size: 1.375rem;
-  text-align: center;
   color: #7b98b2;
 
   @media (min-width: 600px) {
