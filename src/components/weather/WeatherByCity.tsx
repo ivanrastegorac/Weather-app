@@ -8,7 +8,6 @@ import {
   WeatherIconImage,
 } from "./styled";
 import { WeatherData } from "../../services/weatherService";
-import { Link } from "react-router-dom";
 
 interface WeatherByCityProps {
   city: WeatherData;

@@ -78,6 +78,7 @@ export const SearchContainer = styled(Container)`
   width: 100%;
   justify-content: center;
   align-items: flex-start;
+  margin: 15px;
 `;
 
 export const SearchInput = styled.input`
@@ -99,7 +100,7 @@ export const SavedCities = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   max-width: 800px;
-  margin: auto;
+  margin: 15px;
   justify-content: center;
 `;
 
