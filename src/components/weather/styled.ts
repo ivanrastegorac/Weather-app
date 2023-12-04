@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../ui/button/Button";
+import { Link } from "react-router-dom";
 
 // Common styles
 
@@ -96,6 +97,10 @@ export const SearchButton = styled(Button)`
 export const SavedCities = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: auto;
+  justify-content: center;
 `;
 
 export const SavedCity = styled(Container)`
@@ -103,8 +108,11 @@ export const SavedCity = styled(Container)`
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
-  width: 150px;
+  width: 200px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const RemoveButton = styled.button`
@@ -126,6 +134,33 @@ export const SaveButton = styled.button`
   position: absolute;
 `;
 
+export const SavedCityLink = styled(Link)`
+  text-decoration: none;
+  color: #396bae;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+`;
+
+export const TemperatureText = styled.p`
+  font-size: 16px;
+  margin: 8px 0;
+  color: #396bae;
+`;
+
+export const WeatherDescriptionText = styled.p`
+  font-size: 16px;
+  color: #7b98b2;
+  margin: 8px 0;
+`;
+
+export const WeatherIconImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  margin-top: 8px;
+`;
+
 // CurrentWeather styles
 
 export const LocalWeatherWrapper = styled(Container)`
@@ -133,7 +168,7 @@ export const LocalWeatherWrapper = styled(Container)`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 300px;
+  width: 350px;
   height: 350px;
   max-width: 800px;
   padding: 20px;

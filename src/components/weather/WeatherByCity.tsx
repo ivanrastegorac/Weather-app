@@ -1,5 +1,12 @@
 import React from "react";
-import { RemoveButton, SavedCity } from "./styled";
+import {
+  RemoveButton,
+  SavedCity,
+  SavedCityLink,
+  TemperatureText,
+  WeatherDescriptionText,
+  WeatherIconImage,
+} from "./styled";
 import { WeatherData } from "../../services/weatherService";
 import { Link } from "react-router-dom";
 
@@ -22,16 +29,16 @@ const WeatherByCity: React.FC<WeatherByCityProps> = ({
 
   return (
     <SavedCity>
-      <Link to={`/${city.name}`}>{city.name}</Link>
-      <p>{city.main.temp} °C</p>
-      <p>{city.weather[0].description}</p>
+      <SavedCityLink to={`/${city.name}`}>{city.name}</SavedCityLink>
+      <TemperatureText>{city.main.temp} °C</TemperatureText>
+      <WeatherDescriptionText>
+        {city.weather[0].description}
+      </WeatherDescriptionText>
       {city.weather[0].icon && (
-        <p>
-          <img
-            src={`${OPEN_WEATHER_URL}${city.weather[0].icon}.png`}
-            alt="Weather Icon"
-          />
-        </p>
+        <WeatherIconImage
+          src={`${OPEN_WEATHER_URL}${city.weather[0].icon}.png`}
+          alt="Weather Icon"
+        />
       )}
       <RemoveButton onClick={removeCity}>Remove</RemoveButton>
     </SavedCity>
