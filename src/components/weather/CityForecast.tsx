@@ -56,8 +56,8 @@ const CityForecast: React.FC = () => {
               />
             )}
             <TemperatureWrapper>
-              <DayTemp>{item.minTemp} °C</DayTemp>
-              <DayTemp>{item.maxTemp} °C</DayTemp>
+              <DayTemp>{item.minTemp}°C</DayTemp>
+              <DayTemp>{item.maxTemp}°C</DayTemp>
             </TemperatureWrapper>
           </ForecastItem>
         ))}

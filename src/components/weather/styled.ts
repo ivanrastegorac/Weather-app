@@ -375,10 +375,12 @@ export const ForecastContainer = styled(Container)`
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  align-items: center;
 `;
 
 export const ForecastHeader = styled.h2`
   text-align: center;
+  color: #396bae;
   margin-bottom: 20px;
   font-family: "Verdana", sans-serif;
 `;
@@ -388,10 +390,12 @@ export const ForecastList = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 export const ForecastItem = styled.li`
   margin-bottom: 10px;
+  width: 180px;
   padding: 10px;
   background: #f9f9f9;
   border-radius: 8px;
@@ -408,6 +412,7 @@ export const DayName = styled(Paragraph)`
 export const TemperatureWrapper = styled(Container)`
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
 `;
 
 export const DayTemp = styled(Paragraph)`
