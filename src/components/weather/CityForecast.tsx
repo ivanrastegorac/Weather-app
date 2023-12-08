@@ -32,7 +32,6 @@ const CityForecast: React.FC = () => {
         if (cityName) {
           const data = await fetchCityForecast(cityName);
           setForecastData(data);
-          console.log(data);
         }
       } catch (error) {
         console.error("Error fetching city forecast:", error);
