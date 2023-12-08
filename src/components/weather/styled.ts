@@ -390,7 +390,7 @@ export const ForecastList = styled.ul`
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const ForecastItem = styled.li`
