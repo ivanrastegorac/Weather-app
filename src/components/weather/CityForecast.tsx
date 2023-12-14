@@ -11,9 +11,7 @@ import {
   WeatherImage,
   DayTemp,
 } from "./styled";
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-interface ForecastItem {
+interface ForecastItemProps {
   dayName: string;
   minTemp: number;
   maxTemp: number;
@@ -23,8 +21,8 @@ interface ForecastItem {
 
 const CityForecast: React.FC = () => {
   const { cityName } = useParams<{ cityName?: string }>();
-  const [forecastData, setForecastData] = useState<ForecastItem[]>([]);
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+  const [forecastData, setForecastData] = useState<ForecastItemProps[]>([]);
+  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   useEffect(() => {
     const fetchData = async () => {

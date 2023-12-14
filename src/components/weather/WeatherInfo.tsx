@@ -37,7 +37,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   weatherData,
   saveCurrentCity,
 }) => {
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   return (
     <SearchedWeatherWrapper>

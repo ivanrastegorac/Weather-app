@@ -24,7 +24,7 @@ const WeatherByCity: React.FC<WeatherByCityProps> = ({
     );
   };
 
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   return (
     <SavedCity>

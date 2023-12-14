@@ -44,7 +44,7 @@ const CurrentWeather: React.FC = () => {
   const temperature = localWeatherData?.current.clouds;
   const location = localWeatherData?.timezone;
   const weatherDescription = localWeatherData?.current?.weather[0]?.description;
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   return (
     <LocalWeatherWrapper>
