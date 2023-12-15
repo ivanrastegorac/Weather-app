@@ -22,7 +22,6 @@ interface ForecastItemProps {
 const CityForecast: React.FC = () => {
   const { cityName } = useParams<{ cityName?: string }>();
   const [forecastData, setForecastData] = useState<ForecastItemProps[]>([]);
-  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,10 +46,7 @@ const CityForecast: React.FC = () => {
           <ForecastItem key={index}>
             <DayName>{item.dayName}</DayName>
             {item.weatherIcon && (
-              <WeatherImage
-                src={`${OPEN_WEATHER_URL}${item.weatherIcon}.png`}
-                alt="Weather Icon"
-              />
+              <WeatherImage weatherIcon={item.weatherIcon} />
             )}
             <TemperatureWrapper>
               <DayTemp>{item.minTemp}°C</DayTemp>

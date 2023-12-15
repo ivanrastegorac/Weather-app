@@ -2,6 +2,12 @@ import styled from "styled-components";
 import Button from "../ui/button/Button";
 import { Link } from "react-router-dom";
 
+interface WeatherImageProps {
+  weatherIcon: string;
+}
+
+const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
+
 // Common styles
 
 const Container = styled.div`
@@ -329,11 +335,14 @@ export const WeatherIcon = styled.div`
   }
 `;
 
-export const WeatherImage = styled.img`
+export const WeatherImage = styled.div<WeatherImageProps>`
   max-width: 100%;
   height: auto;
   width: 100px;
   height: 70px;
+  background: url(${(props) => `${OPEN_WEATHER_URL}${props.weatherIcon}.png`})
+    no-repeat center center;
+  background-size: contain;
 `;
 
 export const InfoWrapper = styled(Container)`
