@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ReactNode } from "react";
-import { kelvinToCelsius } from "../components/weather/Temperature";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
@@ -46,8 +45,9 @@ interface ApiForecastItem {
 export const fetchLocalWeather = async (lat: number, lon: number) => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${API_KEY}`
+      `${BASE_URL}/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${API_KEY}&units=metric`
     );
+
     return response.data;
   } catch (error) {
     throw error;
@@ -57,21 +57,21 @@ export const fetchLocalWeather = async (lat: number, lon: number) => {
 export const fetchWeather = async (city: string): Promise<WeatherData> => {
   try {
     const response = await axios.get(
-      `${BASE_URL}/weather?q=${city}&appid=${API_KEY}`
+      `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`
     );
 
-    const weatherDataInCelsius: WeatherData = {
+    const roundedWeatherData: WeatherData = {
       ...response.data,
       main: {
         ...response.data.main,
-        temp: kelvinToCelsius(response.data.main.temp),
-        feels_like: kelvinToCelsius(response.data.main.feels_like),
-        temp_min: kelvinToCelsius(response.data.main.temp_min),
-        temp_max: kelvinToCelsius(response.data.main.temp_max),
+        temp: Math.round(response.data.main.temp),
+        feels_like: Math.round(response.data.main.feels_like),
+        temp_min: Math.round(response.data.main.temp_min),
+        temp_max: Math.round(response.data.main.temp_max),
       },
     };
 
-    return weatherDataInCelsius;
+    return roundedWeatherData;
   } catch (error) {
     throw new Error("Failed to fetch data");
   }
@@ -80,7 +80,7 @@ export const fetchWeather = async (city: string): Promise<WeatherData> => {
 export const fetchCityForecast = async (city: string) => {
   try {
     const response = await axios.get<CityForecast>(
-      `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}`
+      `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`
     );
 
     const forecastDataInCelsius = response.data.list.map(
@@ -88,8 +88,8 @@ export const fetchCityForecast = async (city: string) => {
         ...item,
         main: {
           ...item.main,
-          temp_min: kelvinToCelsius(item.main.temp_min),
-          temp_max: kelvinToCelsius(item.main.temp_max),
+          temp_min: Math.round(item.main.temp_min),
+          temp_max: Math.round(item.main.temp_max),
         },
       })
     );
