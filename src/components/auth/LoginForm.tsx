@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/slices/authSlice";
-import { FormLabel, FormWrapper, LogInFormTitle } from "./styled";
+import {
+  FormLabel,
+  FormWrapper,
+  LogInFormTitle,
+  LoginFormContainer,
+} from "./styled";
 import Input from "../ui/input/Input";
 import Button from "../ui/button/Button";
 import { ButtonType } from "../ui/button/ButtonType";
@@ -43,37 +48,39 @@ const LoginForm: React.FC = () => {
 
   return (
     <FormWrapper>
-      <LogInFormTitle>LOG IN TO SEE WEATHER FORECAST</LogInFormTitle>
-      <InputContainer>
-        <FormLabel htmlFor="email">EMAIL</FormLabel>
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </InputContainer>
-      <InputContainer>
-        <FormLabel htmlFor="password">PASSWORD</FormLabel>
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-      </InputContainer>
-      {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-      <ButtonWrapper>
-        <Button
-          type={ButtonType.Primary}
-          onClick={handleLogin}
-          disabled={!passwordValidation}
-        >
-          Login
-        </Button>
-      </ButtonWrapper>
+      <LoginFormContainer>
+        <LogInFormTitle>LOG IN TO SEE WEATHER FORECAST</LogInFormTitle>
+        <InputContainer>
+          <FormLabel htmlFor="email">EMAIL</FormLabel>
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </InputContainer>
+        <InputContainer>
+          <FormLabel htmlFor="password">PASSWORD</FormLabel>
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </InputContainer>
+        {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+        <ButtonWrapper>
+          <Button
+            type={ButtonType.Primary}
+            onClick={handleLogin}
+            disabled={!passwordValidation}
+          >
+            Login
+          </Button>
+        </ButtonWrapper>
+      </LoginFormContainer>
     </FormWrapper>
   );
 };

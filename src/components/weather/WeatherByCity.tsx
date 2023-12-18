@@ -1,5 +1,12 @@
 import React from "react";
-import { RemoveButton, SavedCity } from "./styled";
+import {
+  RemoveButton,
+  SavedCity,
+  SavedCityLink,
+  TemperatureText,
+  WeatherDescriptionText,
+  WeatherIconImage,
+} from "./styled";
 import { WeatherData } from "../../services/weatherService";
 
 interface WeatherByCityProps {
@@ -17,20 +24,20 @@ const WeatherByCity: React.FC<WeatherByCityProps> = ({
     );
   };
 
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   return (
     <SavedCity>
-      <h2>{city.name}</h2>
-      <p>{city.main.temp} K</p>
-      <p>{city.weather[0].description}</p>
+      <SavedCityLink to={`/${city.name}`}>{city.name}</SavedCityLink>
+      <TemperatureText>{city.main.temp} °C</TemperatureText>
+      <WeatherDescriptionText>
+        {city.weather[0].description}
+      </WeatherDescriptionText>
       {city.weather[0].icon && (
-        <p>
-          <img
-            src={`${OPEN_WEATHER_URL}${city.weather[0].icon}.png`}
-            alt="Weather Icon"
-          />
-        </p>
+        <WeatherIconImage
+          src={`${OPEN_WEATHER_URL}${city.weather[0].icon}.png`}
+          alt="Weather Icon"
+        />
       )}
       <RemoveButton onClick={removeCity}>Remove</RemoveButton>
     </SavedCity>

@@ -3,10 +3,10 @@ import { LocalWeatherData } from "./weatherTypes";
 import { fetchLocalWeather } from "../../services/weatherService";
 import {
   CurrentWeatherStatus,
-  CurrentWeatherWrapper,
+  LocalWeatherWrapper,
   Info,
   InfoWrapper,
-  SyledCityTitle,
+  StyledCityTitle,
   Temperature,
   TitleWrapper,
   WeatherDescription,
@@ -44,12 +44,12 @@ const CurrentWeather: React.FC = () => {
   const temperature = localWeatherData?.current.clouds;
   const location = localWeatherData?.timezone;
   const weatherDescription = localWeatherData?.current?.weather[0]?.description;
-  const OPEN_WEATHER_URL = "https://openweathermap.org/img/w/";
+  const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   return (
-    <CurrentWeatherWrapper>
+    <LocalWeatherWrapper>
       <TitleWrapper>Current Weather</TitleWrapper>
-      <SyledCityTitle>{location}</SyledCityTitle>
+      <StyledCityTitle>{location}</StyledCityTitle>
       <CurrentWeatherStatus>
         <WeatherIcon>
           {localWeatherData.current.weather[0].icon && (
@@ -71,7 +71,7 @@ const CurrentWeather: React.FC = () => {
         </InfoWrapper>
       </CurrentWeatherStatus>
       <WeatherDescription>{weatherDescription}</WeatherDescription>
-    </CurrentWeatherWrapper>
+    </LocalWeatherWrapper>
   );
 };
 
