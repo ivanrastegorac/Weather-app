@@ -49,6 +49,7 @@ export interface Temperature {
   night: number;
   eve: number;
   morn: number;
+  weatherIcon: string;
 }
 
 export const fetchLocalWeather = async (lat: number, lon: number) => {
@@ -141,6 +142,7 @@ export const fetchTemperature = async (
       night: Math.round(response.data.main.temp_min),
       eve: Math.round(response.data.main.temp),
       morn: Math.round(response.data.main.feels_like),
+      weatherIcon: response.data.weather[0]?.icon || "",
     };
 
     return temperatureData;

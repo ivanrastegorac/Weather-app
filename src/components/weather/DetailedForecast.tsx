@@ -8,7 +8,7 @@ const DetailedForecast: React.FC = () => {
   const [selectedDayForecast, setSelectedDayForecast] =
     useState<Temperature | null>(null);
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchData = async () => {
       try {
         if (cityName) {
@@ -43,16 +43,20 @@ const DetailedForecast: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Day</td>
-              <td>
-                {/* <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} /> */}
-              </td>
-              <td>{selectedDayForecast.morn}°C</td>
-              <td>{selectedDayForecast.day}°C</td>
-              <td>{selectedDayForecast.eve}°C</td>
-              <td>{selectedDayForecast.night}°C</td>
-            </tr>
+          {["01:00", "07:00", "13:00", "19:00"].map((hour, hourIndex) => (
+      <tr key={hourIndex}>
+        <td>{hour}</td>
+        
+        <td>
+          <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} />
+        </td>
+        
+        <td>{selectedDayForecast.morn}°C</td>
+        <td>{selectedDayForecast.day}°C</td>
+        <td>{selectedDayForecast.eve}°C</td>
+        <td>{selectedDayForecast.night}°C</td>
+      </tr>
+    ))}
           </tbody>
         </table>
       )}
