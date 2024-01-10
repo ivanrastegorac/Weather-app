@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ForecastContainer, ForecastHeader, WeatherImage } from "./styled";
+import { ForecastContainer, ForecastHeader, ForecastIcon, ForecastTable, ResponsiveForecastList, StyledTableHeader, WeatherImage } from "./styled";
 import { Temperature, fetchTemperature } from "../../services/weatherService";
 
 const DetailedForecast: React.FC = () => {
@@ -30,16 +30,17 @@ const DetailedForecast: React.FC = () => {
       <ForecastHeader>
         {cityName} {day} Forecast
       </ForecastHeader>
+     <ResponsiveForecastList>
       {selectedDayForecast && (
-        <table>
+        <ForecastTable>
           <thead>
             <tr>
-              <th>Time</th>
-              <th>Weather</th>
-              <th>Morning</th>
-              <th>Day</th>
-              <th>Evening</th>
-              <th>Night</th>
+              <StyledTableHeader>Time</StyledTableHeader>
+              <StyledTableHeader>Weather</StyledTableHeader>
+              <StyledTableHeader>Morning</StyledTableHeader>
+              <StyledTableHeader>Day</StyledTableHeader>
+              <StyledTableHeader>Evening</StyledTableHeader>
+              <StyledTableHeader>Night</StyledTableHeader>
             </tr>
           </thead>
           <tbody>
@@ -47,9 +48,9 @@ const DetailedForecast: React.FC = () => {
       <tr key={hourIndex}>
         <td>{hour}</td>
         
-        <td>
+        <ForecastIcon>
           <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} />
-        </td>
+        </ForecastIcon>
         
         <td>{selectedDayForecast.morn}°C</td>
         <td>{selectedDayForecast.day}°C</td>
@@ -58,8 +59,9 @@ const DetailedForecast: React.FC = () => {
       </tr>
     ))}
           </tbody>
-        </table>
+        </ForecastTable>
       )}
+      </ResponsiveForecastList>
     </ForecastContainer>
   );
 };
