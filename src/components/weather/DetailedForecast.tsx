@@ -5,6 +5,7 @@ import { Temperature, fetchTemperature } from "../../services/weatherService";
 
 const DetailedForecast: React.FC = () => {
   const { cityName, day } = useParams<{ cityName: string; day: string }>();
+  // const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined);
   const [selectedDayForecast, setSelectedDayForecast] =
     useState<Temperature | null>(null);
 
@@ -24,6 +25,29 @@ const DetailedForecast: React.FC = () => {
 
     fetchData();
   }, [cityName]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (cityName) {
+  //       const data = await fetchWeatherData(cityName);
+  //       setWeatherData(data);
+  //       // console.log(data)
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [cityName]);
+
+  // console.log(weatherData);
+
+  // const temperatureData = weatherData?.daily?.map((day) => ({
+  //   day: day.day,
+  //   night: day.night,
+  //   eve: day.eve,
+  //   morn: day.morn,
+  // }));
+
+  // console.log(temperatureData);
 
   return (
     <ForecastContainer>

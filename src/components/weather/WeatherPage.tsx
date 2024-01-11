@@ -40,6 +40,12 @@ const WeatherPage: React.FC = () => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   const isCityAlreadySaved = (city: WeatherData) => {
     return savedCities.some((savedCity) => savedCity.name === city.name);
   };
@@ -67,6 +73,7 @@ const WeatherPage: React.FC = () => {
           placeholder="Search city"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
         <Button type={ButtonType.Search} onClick={handleSearch}>
           Search
