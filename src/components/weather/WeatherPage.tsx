@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "../ui/button/Button";
 import { ButtonType } from "../ui/button/ButtonType";
-import { WeatherData, fetchWeather } from "../../services/weatherService";
 import {
   ErrorText,
   LoadingText,
@@ -13,13 +12,14 @@ import {
 import CurrentWeather from "./CurrentWeather";
 import WeatherByCity from "./WeatherByCity";
 import WeatherInfo from "./WeatherInfo";
+import { WeatherData, fetchWeather } from "../../services/weatherService";
+import { useWeatherContext } from "../../redux/weatherContext";
 
 const WeatherPage: React.FC = () => {
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const { currentCity, setWeatherData, savedCities, setSavedCities } = useWeatherContext();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState("");
-  const [savedCities, setSavedCities] = useState<WeatherData[]>([]);
 
   const handleSearch = async () => {
     if (city) {
@@ -51,10 +51,10 @@ const WeatherPage: React.FC = () => {
   };
 
   const saveCurrentCity = () => {
-    if (!weatherData) {
+    if (!currentCity) {
       return;
     }
-    if (isCityAlreadySaved(weatherData)) {
+    if (isCityAlreadySaved(currentCity)) {
       alert("This city is already saved.");
       return;
     }
@@ -62,7 +62,7 @@ const WeatherPage: React.FC = () => {
       alert("You can save a maximum of 10 cities.");
       return;
     }
-    setSavedCities([...savedCities, weatherData]);
+    setSavedCities([...savedCities, currentCity]);
   };
 
   return (
@@ -80,25 +80,18 @@ const WeatherPage: React.FC = () => {
         </Button>
       </SearchContainer>
 
-      {!weatherData && <CurrentWeather />}
+      {!currentCity && <CurrentWeather />}
 
       {loading && <LoadingText>Loading...</LoadingText>}
       {error && <ErrorText>{error}</ErrorText>}
 
-      {weatherData && weatherData.main ? (
-        <WeatherInfo
-          weatherData={weatherData}
-          saveCurrentCity={saveCurrentCity}
-        />
+      {currentCity && currentCity.main ? (
+        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} />
       ) : null}
 
       <SavedCities>
         {savedCities.map((city, index) => (
-          <WeatherByCity
-            key={index}
-            city={city}
-            setSavedCities={setSavedCities}
-          />
+          <WeatherByCity key={index} city={city} setSavedCities={setSavedCities} />
         ))}
       </SavedCities>
     </WeatherContainer>
