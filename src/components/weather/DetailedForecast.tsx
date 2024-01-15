@@ -55,36 +55,41 @@ const DetailedForecast: React.FC = () => {
         {cityName} {day} Forecast
       </ForecastHeader>
      <ResponsiveForecastList>
-      {selectedDayForecast && (
-        <ForecastTable>
-          <thead>
-            <tr>
-              <StyledTableHeader>Time</StyledTableHeader>
-              <StyledTableHeader>Weather</StyledTableHeader>
-              <StyledTableHeader>Morning</StyledTableHeader>
-              <StyledTableHeader>Day</StyledTableHeader>
-              <StyledTableHeader>Evening</StyledTableHeader>
-              <StyledTableHeader>Night</StyledTableHeader>
-            </tr>
-          </thead>
-          <tbody>
-          {["01:00", "07:00", "13:00", "19:00"].map((hour, hourIndex) => (
-      <tr key={hourIndex}>
-        <td>{hour}</td>
-        
-        <ForecastIcon>
-          <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} />
-        </ForecastIcon>
-        
-        <td>{selectedDayForecast.morn}°C</td>
-        <td>{selectedDayForecast.day}°C</td>
-        <td>{selectedDayForecast.eve}°C</td>
-        <td>{selectedDayForecast.night}°C</td>
+     {selectedDayForecast && (
+  <ForecastTable>
+    <thead>
+      <tr>
+        <StyledTableHeader>Time</StyledTableHeader>
+        <StyledTableHeader>Weather</StyledTableHeader>
+        <StyledTableHeader>Temperature</StyledTableHeader>
       </tr>
-    ))}
-          </tbody>
-        </ForecastTable>
-      )}
+    </thead>
+    <tbody>
+      {["01:00", "07:00", "13:00", "19:00"].map((hour, hourIndex) => (
+        <tr key={hourIndex}>
+          <td>{hour}</td>
+
+          <ForecastIcon>
+            <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} />
+          </ForecastIcon>
+
+          <td>
+            {hour === "01:00"
+              ? selectedDayForecast.morn
+              : hour === "07:00"
+              ? selectedDayForecast.day
+              : hour === "13:00"
+              ? selectedDayForecast.eve
+              : hour === "19:00"
+              ? selectedDayForecast.night
+              : ""}
+            °C
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </ForecastTable>
+)}
       </ResponsiveForecastList>
     </ForecastContainer>
   );
