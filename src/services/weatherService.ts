@@ -151,14 +151,3 @@ export const fetchTemperature = async (
     throw error;
   }
 };
-
-
-// export const fetchWeatherData = async (cityName: string): Promise<WeatherData | undefined> => {
-//   try {
-//     const response = await axios.get(`${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}`);
-//     return response.data as WeatherData;
-//   } catch (error) {
-//     console.error("Error fetching weather data:", error);
-//     return undefined;
-//   }
-// };
