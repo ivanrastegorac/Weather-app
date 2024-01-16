@@ -18,10 +18,11 @@ interface ForecastItemProps {
   maxTemp: number;
   weatherDescription: string;
   weatherIcon?: string;
-}
+  cityName?: string;
+} 
 
 const CityForecast: React.FC = () => {
-  const { cityName }: { cityName?: string; dayName?: string } = useParams();
+  const { cityName } = useParams();
 
   const [forecastData, setForecastData] = useState<ForecastItemProps[]>([]);
   const navigate = useNavigate();
