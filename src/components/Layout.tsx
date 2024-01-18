@@ -7,6 +7,8 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => (
+  // ToDo - add main container for logged routes
+  // ToDO - create footer and implement here
   <PageLayout>
     <Header title="Welcome to Weather Forecast" />
     {children}

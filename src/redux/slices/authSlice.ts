@@ -15,13 +15,15 @@ const initialState: AuthState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
+    // ToDo => remove this action we don't need it
     loginSuccess: (state, action: PayloadAction<User>) => {
       state.isAuthenticated = true;
       state.user = action.payload;
     },
+    // ToDo => remove this action we don't need it
     logoutSuccess: (state) => {
       state.isAuthenticated = false;
       state.user = null;
