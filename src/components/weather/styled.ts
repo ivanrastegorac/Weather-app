@@ -439,3 +439,37 @@ export const ResponsiveForecastList = styled(ForecastList)`
     }
   }
 `;
+
+export const ForecastTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+`;
+
+export const ForecastIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border: 1px solid #ddd;
+`;
+
+export const StyledTableHeader = styled.th`
+  padding: 12px;
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+  text-align: center;
+`;

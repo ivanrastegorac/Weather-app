@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchCityForecast } from "../../services/weatherService";
 import {
   ForecastContainer,
@@ -11,17 +11,21 @@ import {
   WeatherImage,
   DayTemp,
 } from "./styled";
+
 interface ForecastItemProps {
   dayName: string;
   minTemp: number;
   maxTemp: number;
   weatherDescription: string;
   weatherIcon?: string;
-}
+  cityName?: string;
+} 
 
 const CityForecast: React.FC = () => {
-  const { cityName } = useParams<{ cityName?: string }>();
+  const { cityName } = useParams();
+
   const [forecastData, setForecastData] = useState<ForecastItemProps[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,13 +42,19 @@ const CityForecast: React.FC = () => {
     fetchData();
   }, [cityName]);
 
+  const handleForecastClick = (day: string) => {
+    navigate(`/${cityName}/${day}`);
+  };
+
   return (
     <ForecastContainer>
       <ForecastHeader>{cityName} 5-Day Forecast</ForecastHeader>
       <ResponsiveForecastList>
         {forecastData.map((item, index) => (
           <ForecastItem key={index}>
-            <DayName>{item.dayName}</DayName>
+            <DayName onClick={() => handleForecastClick(item.dayName)}>
+              {item.dayName}
+            </DayName>
             {item.weatherIcon && (
               <WeatherImage weatherIcon={item.weatherIcon} />
             )}

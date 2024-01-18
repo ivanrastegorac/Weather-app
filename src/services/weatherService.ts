@@ -17,10 +17,12 @@ export interface WeatherData {
     speed: number;
   };
   name: string;
+
   sys: {
     country: string;
   };
   weather: WeatherInfo[];
+  daily?: Temperature[]; 
 }
 
 interface WeatherInfo {
@@ -40,6 +42,15 @@ interface ApiForecastItem {
     temp_max: number;
   };
   weather: WeatherInfo[];
+  daily: Temperature[];
+}
+
+export interface Temperature {
+  day: number;
+  night: number;
+  eve: number;
+  morn: number;
+  weatherIcon: string;
 }
 
 export const fetchLocalWeather = async (lat: number, lon: number) => {
@@ -114,6 +125,28 @@ export const fetchCityForecast = async (city: string) => {
     }));
 
     return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchTemperature = async (
+  cityName: string
+): Promise<Temperature> => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+    );
+
+    const temperatureData: Temperature = {
+      day: Math.round(response.data.main.temp_max),
+      night: Math.round(response.data.main.temp_min),
+      eve: Math.round(response.data.main.temp),
+      morn: Math.round(response.data.main.feels_like),
+      weatherIcon: response.data.weather[0]?.icon || "",
+    };
+
+    return temperatureData;
   } catch (error) {
     throw error;
   }
