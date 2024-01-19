@@ -1,25 +1,23 @@
 import styled from "styled-components";
 
-export const FooterStyle = styled.footer`
-  background-color: #09578b;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-  font-family: "Arial", sans-serif;
+export const FooterWrapper = styled.div`
+  background: #87cefa;
   border-radius: 5px;
-  width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  margin: auto;
+  padding: 20px 0;
+  height: 20px !important;
 `;
 
 export const FooterText = styled.p`
-  font-size: 14px;
-  margin: 0;
+  font-size: 18px;
 `;
 
 export const FooterLink = styled.a`
   color: #fff;
-  text-decoration: underline;
 
   &:hover {
-    color: #fff;
+    color: grey;
   }
 `;

@@ -30,7 +30,6 @@ export const WeatherContainer = styled(Container)`
     "cities weather";
   height: 85vh;
   max-width: 800px;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -379,6 +378,7 @@ export const WeatherDescription = styled(Paragraph)`
 // Forecast styles
 
 export const ForecastContainer = styled(Container)`
+  background: linear-gradient(to top, #87cefa, white);
   max-width: 550px;
   margin: auto;
   padding: 20px;
