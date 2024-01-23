@@ -18,7 +18,9 @@ export const PageLayout = styled.div`
     }
   }
 
-  footer > div:not(.full-width-container) {
-    max-width: 76rem;
+  footer {
+    & > div:not(.full-width-container) {
+      max-width: 76rem;
+    }
   }
 `;
