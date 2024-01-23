@@ -26,6 +26,7 @@ export const WeatherContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
 `;
 
 // Typography styles
