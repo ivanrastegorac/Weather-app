@@ -21,12 +21,11 @@ export const WeatherContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  height: 85vh;
+  min-height: 80vh;
   max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
 `;
 
 // Typography styles
