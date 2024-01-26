@@ -364,11 +364,13 @@ export const WeatherDescription = styled(Paragraph)`
 
 export const ForecastContainer = styled(Container)`
   background: linear-gradient(to top, #87cefa, white);
+  min-height: 80vh;
   max-width: 550px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   align-items: center;
 `;
 

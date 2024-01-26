@@ -48,30 +48,30 @@ const DetailedForecast: React.FC = () => {
         {cityName} {day} Forecast
       </ForecastHeader>
      <ResponsiveForecastList>
-     {selectedDayForecast && (
-  <ForecastTable>
-    <thead>
-      <tr>
-        <StyledTableHeader>Time</StyledTableHeader>
-        <StyledTableHeader>Weather</StyledTableHeader>
-        <StyledTableHeader>Temperature</StyledTableHeader>
-      </tr>
-    </thead>
-    <tbody>
-      {definedHours.map((hour, hourIndex) => (
-        <tr key={hourIndex}>
-          <td>{hour}</td>
+      {selectedDayForecast && (
+          <ForecastTable>
+            <thead>
+              <tr>
+                <StyledTableHeader>Time</StyledTableHeader>
+                <StyledTableHeader>Weather</StyledTableHeader>
+                <StyledTableHeader>Temperature</StyledTableHeader>
+              </tr>
+                  </thead>
+            <tbody>
+              {definedHours.map((hour, hourIndex) => (
+                <tr key={hourIndex}>
+                  <td>{hour}</td>
 
-          <ForecastIcon>
-            <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} />
-          </ForecastIcon>
+                  <ForecastIcon>
+                    <WeatherImage weatherIcon={selectedDayForecast.weatherIcon} />
+                  </ForecastIcon>
 
-          <td>{getTemperatureForHour(hour)}°C</td>
-        </tr>
-      ))}
-    </tbody>
-  </ForecastTable>
-)}
+                  <td>{getTemperatureForHour(hour)}°C</td>
+                </tr>
+              ))}
+            </tbody>
+          </ForecastTable>
+            )}
       </ResponsiveForecastList>
     </ForecastContainer>
   );
