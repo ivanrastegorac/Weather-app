@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageLayout } from './styled';
 import Header from './ui/header/Header';
+import Footer from './ui/footer/Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -8,9 +9,9 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => (
   // ToDo - add main container for logged routes
-  // ToDO - create footer and implement here
   <PageLayout>
     <Header title="Welcome to Weather Forecast" />
     {children}
+    <Footer name="Ivan Rastegorac"/>
   </PageLayout>
 );

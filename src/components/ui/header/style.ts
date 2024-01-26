@@ -4,11 +4,11 @@ export const HeaderWrapper = styled.header`
   background-color: #09578b;
   color: #fff;
   padding: 20px 0;
-  border-color: red 5px;
   text-align: center;
   font-family: "Arial", sans-serif;
   border-radius: 5px;
   max-width: 800px;
+  margin: auto;
 `;
 
 export const HeaderTitle = styled.h1`

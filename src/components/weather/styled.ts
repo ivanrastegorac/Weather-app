@@ -16,34 +16,18 @@ const Container = styled.div`
 
 // WeatherContainer
 
-export const WeatherContainer = styled(Container)`
+export const WeatherContainer = styled.div`
   background: linear-gradient(to top, #87cefa, white);
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto 1fr;
-  grid-template-areas:
-    "header header"
-    "search search"
-    "cities weather";
-  height: 85vh;
+  min-height: 80vh;
   max-width: 800px;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-      "header"
-      "search"
-      "cities"
-      "weather";
-  }
+  margin: auto;
 `;
 
 // Typography styles
@@ -379,6 +363,7 @@ export const WeatherDescription = styled(Paragraph)`
 // Forecast styles
 
 export const ForecastContainer = styled(Container)`
+  background: linear-gradient(to top, #87cefa, white);
   max-width: 550px;
   margin: auto;
   padding: 20px;
