@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const FooterWrapper = styled.footer`
   background: #87cefa;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2), 0 2px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin: auto;
 `;
@@ -15,9 +16,9 @@ export const FooterText = styled.p`
 `;
 
 export const FooterLink = styled.a`
-  color: #7b98b2;
+  color: #2c568f;
 
   &:hover {
-    color: grey;
+    color: #1c375c;
   }
 `;

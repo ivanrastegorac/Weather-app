@@ -18,7 +18,8 @@ const Container = styled.div`
 
 export const WeatherContainer = styled.div`
   background: linear-gradient(to top, #87cefa, white);
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   min-height: 80vh;

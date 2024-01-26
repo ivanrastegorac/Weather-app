@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ name }) => {
   return (
     <FooterWrapper>
             <FooterText>
-                Developed by @{""}
+                Developed by {""}
                     <FooterLink href={profileLink} target="_blank" rel="noopener noreferrer">
                         {name}
                     </FooterLink>
