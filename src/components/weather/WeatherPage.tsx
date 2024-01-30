@@ -86,7 +86,7 @@ const WeatherPage: React.FC = () => {
       {error && <ErrorText>{error}</ErrorText>}
 
       {currentCity && currentCity.main ? (
-        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} />
+        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} saveToFavorites={()=>{}} />
       ) : null}
 
       <SavedCities>

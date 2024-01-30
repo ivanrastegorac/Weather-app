@@ -125,6 +125,16 @@ export const SaveButton = styled.button`
   position: absolute;
 `;
 
+export const FavoritesButton = styled.button`
+  background-color: #66cc00;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+`;
+
 export const SavedCityLink = styled(Link)`
   text-decoration: none;
   color: #396bae;
@@ -253,6 +263,12 @@ export const SearchedWeatherWrapper = styled(Container)`
     position: absolute;
     top: 10px;
     right: 10px;
+  }
+
+  ${FavoritesButton}{
+    position: absolute;
+    top: 10px;
+    right: 100px;
   }
 
   ${WeatherInfoWrapper} {

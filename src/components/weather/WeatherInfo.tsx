@@ -1,6 +1,7 @@
 import React from "react";
 import {
   CurrentWeatherStatus,
+  FavoritesButton,
   FeelsLike,
   HighLowContainer,
   Humidity,
@@ -25,23 +26,28 @@ import {
   faArrowUp,
   faTachometerAlt,
   faTint,
-  faWind,
+  faWind
 } from "@fortawesome/free-solid-svg-icons";
+import { ButtonWrapper } from "../ui/button/styled";
 
 interface WeatherInfoProps {
   weatherData: WeatherData;
   saveCurrentCity: () => void;
+  saveToFavorites: () => void; 
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
   weatherData,
   saveCurrentCity,
+  saveToFavorites
 }) => {
   const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
+  
 
   return (
     <SearchedWeatherWrapper>
-      <SaveButton onClick={saveCurrentCity}>Save City</SaveButton>
+        <FavoritesButton onClick={saveToFavorites}>Add to Favorites</FavoritesButton>
+        <SaveButton onClick={saveCurrentCity}>Save City</SaveButton>
       <WeatherInfoWrapper>
         <StyledCityTitle>{weatherData.name}</StyledCityTitle>
         <CurrentWeatherStatus>
