@@ -18,6 +18,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 18px;
   cursor: pointer;
   font-size: 16px;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
 `;
 
 export const ButtonWrapper = styled.div`

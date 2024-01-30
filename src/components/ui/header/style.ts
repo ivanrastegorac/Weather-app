@@ -41,6 +41,11 @@ export const LogoutButton = styled.button`
   border-radius: 4px;
   background-color: #6e8cc2;
   color: white;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #C6C6C6;
+  }
 `;
 
 export const SubheaderWrapper = styled.div`

@@ -113,26 +113,41 @@ export const RemoveButton = styled.button`
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
 `;
 
 export const SaveButton = styled.button`
-  background-color: #66cc00;
+  background-color: #5097C3;
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   position: absolute;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
 `;
 
 export const FavoritesButton = styled.button`
-  background-color: #66cc00;
+  background-color: #F1DB17;
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   position: absolute;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
 `;
 
 export const SavedCityLink = styled(Link)`
@@ -142,6 +157,12 @@ export const SavedCityLink = styled(Link)`
   font-size: 18px;
   margin-bottom: 8px;
   display: block;
+
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #B2B2B2;
+  }
 `;
 
 export const TemperatureText = styled.p`
