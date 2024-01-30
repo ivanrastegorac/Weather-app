@@ -28,7 +28,6 @@ import {
   faTint,
   faWind
 } from "@fortawesome/free-solid-svg-icons";
-import { ButtonWrapper } from "../ui/button/styled";
 
 interface WeatherInfoProps {
   weatherData: WeatherData;
