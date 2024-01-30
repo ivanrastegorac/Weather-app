@@ -5,6 +5,8 @@ import {
   HeaderTitle,
   HeaderWrapper,
   LogoutButton,
+  SubheaderLink,
+  SubheaderWrapper,
 } from "./style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -39,6 +41,11 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
       </HeaderStyle>
 
       {subtitle && <HeaderSubtext>{subtitle}</HeaderSubtext>}
+
+      <SubheaderWrapper>
+        <SubheaderLink to="/">Home</SubheaderLink>
+        <SubheaderLink to="/favorites">Favorites</SubheaderLink>
+      </SubheaderWrapper>
     </HeaderWrapper>
   );
 };

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.header`
@@ -40,4 +41,26 @@ export const LogoutButton = styled.button`
   border-radius: 4px;
   background-color: #6e8cc2;
   color: white;
+`;
+
+export const SubheaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+export const SubheaderLink = styled(Link)`
+  text-decoration: none;
+  color: white; 
+  padding: 0 15px; 
+  font-size: 16px; 
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #B2B2B2;
+  }
+
+  &:not(:last-child) {
+    margin-right: 10px; 
+  }
 `;
