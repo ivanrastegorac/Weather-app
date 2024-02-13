@@ -28,24 +28,28 @@ import {
   faTint,
   faWind
 } from "@fortawesome/free-solid-svg-icons";
+import { useWeatherContext } from "../../redux/weatherContext";
 
 interface WeatherInfoProps {
   weatherData: WeatherData;
   saveCurrentCity: () => void;
-  saveToFavorites: () => void; 
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
   weatherData,
   saveCurrentCity,
-  saveToFavorites
 }) => {
   const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
   
+  const { addToFavorites } = useWeatherContext();
+
+  const handleAddToFavorites = () => {
+    addToFavorites(weatherData);
+  };
 
   return (
     <SearchedWeatherWrapper>
-        <FavoritesButton onClick={saveToFavorites}>Add to Favorites</FavoritesButton>
+        <FavoritesButton onClick={handleAddToFavorites}>Add to Favorites</FavoritesButton>
         <SaveButton onClick={saveCurrentCity}>Save City</SaveButton>
       <WeatherInfoWrapper>
         <StyledCityTitle>{weatherData.name}</StyledCityTitle>

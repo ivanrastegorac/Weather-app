@@ -16,10 +16,11 @@ import { WeatherData, fetchWeather } from "../../services/weatherService";
 import { useWeatherContext } from "../../redux/weatherContext";
 
 const WeatherPage: React.FC = () => {
-  const { currentCity, setWeatherData, savedCities, setSavedCities } = useWeatherContext();
+  const { currentCity, setWeatherData, savedCities, setSavedCities} = useWeatherContext();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState("");
+  
 
   const handleSearch = async () => {
     if (city) {
@@ -86,9 +87,8 @@ const WeatherPage: React.FC = () => {
       {error && <ErrorText>{error}</ErrorText>}
 
       {currentCity && currentCity.main ? (
-        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} saveToFavorites={()=>{}} />
+        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} />
       ) : null}
-
       <SavedCities>
         {savedCities.map((city, index) => (
           <WeatherByCity key={index} city={city} setSavedCities={setSavedCities} />

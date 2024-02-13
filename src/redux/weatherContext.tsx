@@ -6,6 +6,7 @@ export interface WeatherContextProps {
   savedCities: WeatherData[];
   setWeatherData: React.Dispatch<React.SetStateAction<WeatherData | null>>;
   setSavedCities: React.Dispatch<React.SetStateAction<WeatherData[]>>;
+  addToFavorites: (city: WeatherData) => void;
 }
 
 const WeatherContext = createContext<WeatherContextProps | undefined>(undefined);
@@ -14,11 +15,19 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [currentCity, setCurrentCity] = useState<WeatherData | null>(null);
   const [savedCities, setSavedCities] = useState<WeatherData[]>([]);
 
+  const addToFavorites = (city: WeatherData) => {
+    if (!savedCities.some(savedCity => savedCity.name === city.name)) {
+      setSavedCities([...savedCities, city]);
+    }
+  };
+
+
   const contextValue: WeatherContextProps = {
     currentCity,
     savedCities,
     setWeatherData: setCurrentCity,
     setSavedCities,
+    addToFavorites
   };
 
   return (

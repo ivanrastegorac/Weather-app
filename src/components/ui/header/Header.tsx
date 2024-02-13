@@ -40,8 +40,6 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
         </LogoutButton>
       </HeaderStyle>
 
-      {subtitle && <HeaderSubtext>{subtitle}</HeaderSubtext>}
-
       <SubheaderWrapper>
         <SubheaderLink to="/">Home</SubheaderLink>
         <SubheaderLink to="/favorites">Favorites</SubheaderLink>

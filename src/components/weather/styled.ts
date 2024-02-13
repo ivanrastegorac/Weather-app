@@ -497,3 +497,20 @@ export const StyledTableHeader = styled.th`
   background-color: #f2f2f2;
   text-align: center;
 `;
+
+export const FavoritesList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+`;
+
+export const FavoriteItem = styled.li`
+  margin-bottom: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: #007bff;
+  }
+`;
