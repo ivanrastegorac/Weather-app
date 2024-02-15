@@ -35,6 +35,10 @@ export const HeaderStyle = styled.div`
   justify-content: space-between;
 `;
 
+export const LogoutButtonWrapper = styled.div`
+  margin-right: auto;
+`;
+
 export const LogoutButton = styled.button`
   padding: 8px 16px;
   border: none;

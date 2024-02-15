@@ -415,7 +415,13 @@ export const ForecastHeader = styled.h2`
   text-align: center;
   color: #396bae;
   margin-bottom: 20px;
+  margin-left: auto;
+  flex-grow: 1;
   font-family: "Verdana", sans-serif;
+
+  @media (max-width: 768px) {
+    margin-left: 10px;
+  }
 `;
 
 export const ForecastList = styled.ul`
@@ -513,4 +519,11 @@ export const FavoriteItem = styled.li`
   &:hover {
     color: #007bff;
   }
+`;
+
+export const FavoriteTitleWrapper = styled.div`
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  /* height: 100%; */
 `;
