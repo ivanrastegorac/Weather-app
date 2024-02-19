@@ -57,6 +57,7 @@ export const LoadingText = styled.p`
 
 export const ErrorText = styled.p`
   font-size: 20px;
+  font-family: "Verdana", sans-serif;
   color: red;
   margin-top: 20px;
 `;
@@ -157,12 +158,29 @@ export const SavedCityLink = styled(Link)`
   font-size: 18px;
   margin-bottom: 8px;
   display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
 
   transition: color 0.3s ease;
 
   &:hover {
     color: #B2B2B2;
   }
+`;
+
+export const FavoritesCityLink = styled(SavedCityLink)`
+color: #396bae;
+font-weight: bold;
+font-size: 22px;
+margin-bottom: 8px;
+display: block;
+
+transition: color 0.3s ease;
+
+&:hover {
+  color: #B2B2B2;
+}
 `;
 
 export const TemperatureText = styled.p`
@@ -401,7 +419,7 @@ export const WeatherDescription = styled(Paragraph)`
 
 export const ForecastContainer = styled(Container)`
   background: linear-gradient(to top, #87cefa, white);
-  min-height: 80vh;
+  min-height: 75vh;
   max-width: 550px;
   margin: auto;
   padding: 20px;
@@ -523,7 +541,5 @@ export const FavoriteItem = styled.li`
 
 export const FavoriteTitleWrapper = styled.div`
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
-  /* height: 100%; */
 `;

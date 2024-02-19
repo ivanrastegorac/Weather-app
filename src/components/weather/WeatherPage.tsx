@@ -32,7 +32,7 @@ const WeatherPage: React.FC = () => {
         setCity("");
         setError(null);
       } catch (error) {
-        setError("Failed to fetch data");
+        setError("Oops, failed to fetch data");
         setLoading(false);
       }
     } else {
