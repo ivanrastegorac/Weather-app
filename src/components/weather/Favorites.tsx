@@ -1,18 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWeatherContext } from '../../redux/weatherContext';
-import { FavoriteTitleWrapper, FavoritesCityLink, FavoritesList, ForecastContainer, ForecastHeader } from './styled';
+import { DeleteFavorite, FavoriteTitleWrapper, FavoritesCityLink, FavoritesList, FavoritesListContainer, ForecastContainer, ForecastHeader } from './styled';
 import { LogoutButton, LogoutButtonWrapper } from '../ui/header/style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { WeatherData } from '../../services/weatherService';
 
 const Favorites: React.FC = () => {
   const navigate = useNavigate();
-  const {savedCities} = useWeatherContext();
+  const {favoriteCities, setFavoriteCities} = useWeatherContext();
 
   const navigateBack = () => {
     navigate('/');
   };
+
+  const removeFromFavorites = (cityToRemove: WeatherData) => {
+    setFavoriteCities((prevCities) =>
+      prevCities.filter((city) => city.name !== cityToRemove.name)
+    );
+  };
+  
 
   return (
     <ForecastContainer>
@@ -25,8 +33,16 @@ const Favorites: React.FC = () => {
        <ForecastHeader>My favorite cities</ForecastHeader>
       </FavoriteTitleWrapper>
         <FavoritesList>
-          {savedCities.map((city, index) => (
-            <FavoritesCityLink key={index} to={`/${city.name}`}>{city.name}</FavoritesCityLink>
+          {favoriteCities.map((city, index) => (
+            <FavoritesListContainer key={index}>
+              <FavoritesCityLink to={`/${city.name}`}>
+                {city.name}
+                <DeleteFavorite onClick={() => removeFromFavorites(city)}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </DeleteFavorite>
+              </FavoritesCityLink>
+                
+            </FavoritesListContainer>
           ))}
         </FavoritesList> 
     </ForecastContainer>

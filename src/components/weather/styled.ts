@@ -183,6 +183,22 @@ transition: color 0.3s ease;
 }
 `;
 
+export const FavoritesListContainer= styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+export const DeleteFavorite = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #2c568f;
+  margin-left: 10px;
+`;
+
 export const TemperatureText = styled.p`
   font-size: 16px;
   margin: 8px 0;
