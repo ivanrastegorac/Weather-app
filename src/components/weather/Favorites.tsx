@@ -35,13 +35,12 @@ const Favorites: React.FC = () => {
         <FavoritesList>
           {favoriteCities.map((city, index) => (
             <FavoritesListContainer key={index}>
-              <FavoritesCityLink to={`/${city.name}`}>
+              <FavoritesCityLink key={index} to={`/${city.name}`}>
                 {city.name}
-                <DeleteFavorite onClick={() => removeFromFavorites(city)}>
-                  <FontAwesomeIcon icon={faTimes} />
-                </DeleteFavorite>
               </FavoritesCityLink>
-                
+              <DeleteFavorite onClick={() => removeFromFavorites(city)}>
+                  <FontAwesomeIcon icon={faTimes} />
+              </DeleteFavorite>  
             </FavoritesListContainer>
           ))}
         </FavoritesList> 

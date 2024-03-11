@@ -169,34 +169,37 @@ export const SavedCityLink = styled(Link)`
   }
 `;
 
-export const FavoritesCityLink = styled(SavedCityLink)`
-color: #396bae;
-font-weight: bold;
-font-size: 22px;
-margin-bottom: 8px;
-display: block;
+export const FavoritesCityLink = styled(Link)`
+  text-decoration: none;
+  color: #396bae;
+  font-weight: bold;
+  font-size: 22px;
+  width: 10%;
+  margin-bottom: 8px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
 
-transition: color 0.3s ease;
-
-&:hover {
-  color: #B2B2B2;
-}
+  &:hover {
+    color: #B2B2B2;
+  }
 `;
 
 export const FavoritesListContainer= styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  justify-content: center;
 `;
 
 export const DeleteFavorite = styled.button`
   background-color: transparent;
   border: none;
+  margin-bottom: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 22px;
   color: #2c568f;
-  margin-left: 10px;
 `;
 
 export const TemperatureText = styled.p`
@@ -540,7 +543,6 @@ export const StyledTableHeader = styled.th`
 
 export const FavoritesList = styled.ul`
   list-style: none;
-  padding: 0;
   margin-top: 10px;
   font-size: 16px;
   font-family: Arial, sans-serif;
