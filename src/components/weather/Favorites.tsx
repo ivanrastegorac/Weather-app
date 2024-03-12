@@ -6,6 +6,7 @@ import { LogoutButton, LogoutButtonWrapper } from '../ui/header/style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { WeatherData } from '../../services/weatherService';
+import { toast } from 'react-toastify';
 
 const Favorites: React.FC = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Favorites: React.FC = () => {
     setFavoriteCities((prevCities) =>
       prevCities.filter((city) => city.name !== cityToRemove.name)
     );
+    toast.error("City removed from favorites.");
   };
   
 

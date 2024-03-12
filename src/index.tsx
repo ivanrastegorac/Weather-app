@@ -6,6 +6,8 @@ import store from "./redux/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import { WeatherProvider } from "./redux/weatherContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,7 +18,8 @@ root.render(
       <Router>
         <WeatherProvider>
         <App />
-        </WeatherProvider> 
+        </WeatherProvider>
+        <ToastContainer />
       </Router>
     </Provider>
   </React.StrictMode>

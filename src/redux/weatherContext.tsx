@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { WeatherData } from "../services/weatherService";
+import { toast } from "react-toastify";
 
 export interface WeatherContextProps {
   currentCity: WeatherData | null;
@@ -29,11 +30,11 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const saveCurrentCity = (city: WeatherData) => {
     if (isCityAlreadySaved(city)) {
-      alert("This city is already saved.");
+      toast.warning("This city is already saved.");
       return;
     }
     if (savedCities.length >= 10) {
-      alert("You can save a maximum of 10 cities.");
+      toast.error("You can save a maximum of 10 cities.");
       return;
     }
     setSavedCities([...savedCities, city]);
@@ -41,7 +42,7 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const addToFavorites = (city: WeatherData) => {
     if (isCityAlreadyInFavorites(city, favoriteCities)) {
-      alert("This city is already in favorites.");
+      toast.warning("This city is already in favorites.");
       return;
     }
     setFavoriteCities([...favoriteCities, city]);

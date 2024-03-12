@@ -28,6 +28,7 @@ import {
   faTint,
   faWind
 } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 interface WeatherInfoProps {
   weatherData: WeatherData;
@@ -44,6 +45,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
 
   const handleAddToFavorites = () => {
     addToFavorites(weatherData);
+    toast.success(`City successfully added to favorites`)
   };
 
   return (
