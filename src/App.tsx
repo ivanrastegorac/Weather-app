@@ -10,12 +10,12 @@ const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route path="/login" element={<LoginForm />} />
+        <Route path="/" element={<LoginForm />} />
       </Routes>
 
       <PrivateRoute>
-        <Route path="/" element={<WeatherPage />} />
-        <Route path="/favorites"element={<Favorites/>}/>
+        <Route path="/weather" element={<WeatherPage />} />
+        <Route path="/weather/favorites"element={<Favorites/>}/>
         <Route path="/:cityName" element={<CityForecast />} />
         <Route path="/:cityName/:day" element={<DetailedForecast />} />
       </PrivateRoute>

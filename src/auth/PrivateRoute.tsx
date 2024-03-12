@@ -1,8 +1,12 @@
 import { Route, Navigate, Outlet, Routes } from 'react-router-dom';
 import { Layout } from '../components/Layout';
+import { useSelector } from 'react-redux';
+import RootState from '../redux/types';
 
 export const PrivateRoute = ({ element, ...rest }: any) => {
-  const isAuthenticated = localStorage.getItem('X-token') !== null;
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   return (
     <Routes>
@@ -14,7 +18,7 @@ export const PrivateRoute = ({ element, ...rest }: any) => {
               <Outlet />
             </Layout>
           ) : (
-            <Navigate to="/login" />
+            <Navigate to="/" />
           )
         }
       />

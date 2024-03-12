@@ -176,6 +176,7 @@ export const FavoritesCityLink = styled(Link)`
   font-size: 22px;
   width: 10%;
   margin-bottom: 8px;
+  margin-right: 8px;
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
