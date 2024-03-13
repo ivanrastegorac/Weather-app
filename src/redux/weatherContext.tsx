@@ -11,6 +11,8 @@ export interface WeatherContextProps {
   setFavoriteCities: React.Dispatch<React.SetStateAction<WeatherData[]>>;
   saveCurrentCity: (city: WeatherData) => void;
   addToFavorites: (city: WeatherData) => void;
+  isCityAlreadySaved: (city: WeatherData) => boolean;
+  isCityAlreadyInFavorites: (city: WeatherData, favoriteCities: WeatherData[]) => boolean;
 }
 
 const WeatherContext = createContext<WeatherContextProps | undefined>(undefined);
@@ -43,7 +45,6 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addToFavorites = (city: WeatherData) => {
     if (isCityAlreadyInFavorites(city, favoriteCities)) {
       toast.warning("This city is already in favorites.");
-      return;
     }
     setFavoriteCities([...favoriteCities, city]);
   };
@@ -57,6 +58,8 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setFavoriteCities,
     saveCurrentCity,
     addToFavorites,
+    isCityAlreadySaved,
+    isCityAlreadyInFavorites
   };
 
   return (

@@ -29,23 +29,28 @@ import {
   faWind
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import { useWeatherContext } from "../../redux/weatherContext";
 
 interface WeatherInfoProps {
   weatherData: WeatherData;
-  addToFavorites: (city: WeatherData) => void;
   saveCurrentCity: (city: WeatherData) => void;
+  addToFavorites: (city: WeatherData) => void;
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
   weatherData,
   saveCurrentCity,
-  addToFavorites
 }) => {
+  const { addToFavorites, isCityAlreadyInFavorites, favoriteCities } = useWeatherContext();
   const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
 
   const handleAddToFavorites = () => {
-    addToFavorites(weatherData);
-    toast.success(`City successfully added to favorites`)
+    if (isCityAlreadyInFavorites(weatherData, favoriteCities)) {
+      toast.warning("This city is already in favorites.");
+    } else {
+      addToFavorites(weatherData);
+      toast.success(`City successfully added to favorites`)
+    }
   };
 
   return (

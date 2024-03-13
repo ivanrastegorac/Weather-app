@@ -15,7 +15,7 @@ const AppRouter = () => {
 
       <PrivateRoute>
         <Route path="/weather" element={<WeatherPage />} />
-        <Route path="/weather/favorites"element={<Favorites/>}/>
+        <Route path="/favorites"element={<Favorites/>}/>
         <Route path="/:cityName" element={<CityForecast />} />
         <Route path="/:cityName/:day" element={<DetailedForecast />} />
       </PrivateRoute>

@@ -11,7 +11,7 @@ const MainPage = () => {
     <Layout>
       <Routes>
         <Route path="/weather" element={<WeatherPage />} />
-        <Route path="/weather/favorites" element={<Favorites />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="/:cityName/:day" element={<DetailedForecast />} />
         <Route path="/:cityName" element={<CityForecast />} /> 
       </Routes>

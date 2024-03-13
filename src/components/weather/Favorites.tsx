@@ -13,7 +13,7 @@ const Favorites: React.FC = () => {
   const {favoriteCities, setFavoriteCities} = useWeatherContext();
 
   const navigateBack = () => {
-    navigate('/');
+    navigate('/weather');
   };
 
   const removeFromFavorites = (cityToRemove: WeatherData) => {
