@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
       </HeaderStyle>
 
       <SubheaderWrapper>
-        <SubheaderLink to="/">Home</SubheaderLink>
+        <SubheaderLink to="/weather">Home</SubheaderLink>
         <SubheaderLink to="/favorites">Favorites</SubheaderLink>
       </SubheaderWrapper>
     </HeaderWrapper>

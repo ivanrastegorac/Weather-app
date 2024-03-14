@@ -48,8 +48,12 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
     if (isCityAlreadyInFavorites(weatherData, favoriteCities)) {
       toast.warning("This city is already in favorites.");
     } else {
-      addToFavorites(weatherData);
-      toast.success(`City successfully added to favorites`)
+      if (favoriteCities.length >= 10) {
+        toast.error("You can add maximum 10 cities in favorites.");
+      } else {
+        addToFavorites(weatherData);
+        toast.success(`City successfully added to favorites`);
+      }
     }
   };
 

@@ -45,8 +45,13 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addToFavorites = (city: WeatherData) => {
     if (isCityAlreadyInFavorites(city, favoriteCities)) {
       toast.warning("This city is already in favorites.");
+      return;
     }
-    setFavoriteCities([...favoriteCities, city]);
+    if(favoriteCities.length >= 10) {
+      toast.error("You can add maximum 10 cities in favorites.")
+      return;
+    }
+      setFavoriteCities([...favoriteCities, city]);
   };
 
   const contextValue: WeatherContextProps = {
