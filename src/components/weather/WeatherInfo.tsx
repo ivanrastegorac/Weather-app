@@ -1,6 +1,7 @@
 import React from "react";
 import {
   CurrentWeatherStatus,
+  FavoritesButton,
   FeelsLike,
   HighLowContainer,
   Humidity,
@@ -25,23 +26,41 @@ import {
   faArrowUp,
   faTachometerAlt,
   faTint,
-  faWind,
+  faWind
 } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import { useWeatherContext } from "../../redux/weatherContext";
 
 interface WeatherInfoProps {
   weatherData: WeatherData;
-  saveCurrentCity: () => void;
+  saveCurrentCity: (city: WeatherData) => void;
+  addToFavorites: (city: WeatherData) => void;
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
   weatherData,
   saveCurrentCity,
 }) => {
+  const { addToFavorites, isCityAlreadyInFavorites, favoriteCities } = useWeatherContext();
   const OPEN_WEATHER_URL = process.env.REACT_APP_OPEN_WEATHER_URL;
+
+  const handleAddToFavorites = () => {
+    if (isCityAlreadyInFavorites(weatherData, favoriteCities)) {
+      toast.warning("This city is already in favorites.");
+      return;
+    }
+    if (favoriteCities.length >= 10) {
+      toast.error("You can add maximum 10 cities in favorites.");
+      return;
+    }
+    addToFavorites(weatherData);
+    toast.success(`City successfully added to favorites`);
+  };
 
   return (
     <SearchedWeatherWrapper>
-      <SaveButton onClick={saveCurrentCity}>Save City</SaveButton>
+        <FavoritesButton onClick={handleAddToFavorites}>Add to Favorites</FavoritesButton>
+        <SaveButton onClick={() => saveCurrentCity(weatherData)}>Save City</SaveButton>
       <WeatherInfoWrapper>
         <StyledCityTitle>{weatherData.name}</StyledCityTitle>
         <CurrentWeatherStatus>

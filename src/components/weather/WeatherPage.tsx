@@ -12,11 +12,11 @@ import {
 import CurrentWeather from "./CurrentWeather";
 import WeatherByCity from "./WeatherByCity";
 import WeatherInfo from "./WeatherInfo";
-import { WeatherData, fetchWeather } from "../../services/weatherService";
+import { fetchWeather } from "../../services/weatherService";
 import { useWeatherContext } from "../../redux/weatherContext";
 
 const WeatherPage: React.FC = () => {
-  const { currentCity, setWeatherData, savedCities, setSavedCities } = useWeatherContext();
+  const { currentCity, setWeatherData, savedCities, setSavedCities, saveCurrentCity, addToFavorites} = useWeatherContext();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState("");
@@ -31,7 +31,7 @@ const WeatherPage: React.FC = () => {
         setCity("");
         setError(null);
       } catch (error) {
-        setError("Failed to fetch data");
+        setError("Oops, failed to fetch data");
         setLoading(false);
       }
     } else {
@@ -45,26 +45,7 @@ const WeatherPage: React.FC = () => {
       handleSearch();
     }
   };
-
-  const isCityAlreadySaved = (city: WeatherData) => {
-    return savedCities.some((savedCity) => savedCity.name === city.name);
-  };
-
-  const saveCurrentCity = () => {
-    if (!currentCity) {
-      return;
-    }
-    if (isCityAlreadySaved(currentCity)) {
-      alert("This city is already saved.");
-      return;
-    }
-    if (savedCities.length >= 10) {
-      alert("You can save a maximum of 10 cities.");
-      return;
-    }
-    setSavedCities([...savedCities, currentCity]);
-  };
-
+  
   return (
     <WeatherContainer>
       <SearchContainer>
@@ -86,9 +67,8 @@ const WeatherPage: React.FC = () => {
       {error && <ErrorText>{error}</ErrorText>}
 
       {currentCity && currentCity.main ? (
-        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} />
+        <WeatherInfo weatherData={currentCity} saveCurrentCity={saveCurrentCity} addToFavorites={addToFavorites}/>
       ) : null}
-
       <SavedCities>
         {savedCities.map((city, index) => (
           <WeatherByCity key={index} city={city} setSavedCities={setSavedCities} />

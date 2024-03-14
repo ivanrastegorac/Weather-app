@@ -30,7 +30,7 @@ const LoginForm: React.FC = () => {
       return;
     }
     dispatch(loginSuccess({ email: email }));
-    navigate('/');
+    navigate('/weather');
     setErrorMessage(null);
 
     const currentDate = new Date().toISOString();

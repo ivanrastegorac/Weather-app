@@ -57,6 +57,7 @@ export const LoadingText = styled.p`
 
 export const ErrorText = styled.p`
   font-size: 20px;
+  font-family: "Verdana", sans-serif;
   color: red;
   margin-top: 20px;
 `;
@@ -113,16 +114,41 @@ export const RemoveButton = styled.button`
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
 `;
 
 export const SaveButton = styled.button`
-  background-color: #66cc00;
+  background-color: #5097C3;
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   position: absolute;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
+`;
+
+export const FavoritesButton = styled.button`
+  background-color: #F1DB17;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2B2B2B;
+  }
 `;
 
 export const SavedCityLink = styled(Link)`
@@ -132,6 +158,49 @@ export const SavedCityLink = styled(Link)`
   font-size: 18px;
   margin-bottom: 8px;
   display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #B2B2B2;
+  }
+`;
+
+export const FavoritesCityLink = styled(Link)`
+  text-decoration: none;
+  color: #396bae;
+  font-weight: bold;
+  font-size: 22px;
+  width: 10%;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #B2B2B2;
+  }
+`;
+
+export const FavoritesListContainer= styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DeleteFavorite = styled.button`
+  background-color: transparent;
+  border: none;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #2c568f;
 `;
 
 export const TemperatureText = styled.p`
@@ -255,6 +324,12 @@ export const SearchedWeatherWrapper = styled(Container)`
     right: 10px;
   }
 
+  ${FavoritesButton}{
+    position: absolute;
+    top: 10px;
+    right: 100px;
+  }
+
   ${WeatherInfoWrapper} {
     margin-top: 20px;
   }
@@ -364,11 +439,13 @@ export const WeatherDescription = styled(Paragraph)`
 
 export const ForecastContainer = styled(Container)`
   background: linear-gradient(to top, #87cefa, white);
+  min-height: 75vh;
   max-width: 550px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   align-items: center;
 `;
 
@@ -376,7 +453,13 @@ export const ForecastHeader = styled.h2`
   text-align: center;
   color: #396bae;
   margin-bottom: 20px;
+  margin-left: auto;
+  flex-grow: 1;
   font-family: "Verdana", sans-serif;
+
+  @media (max-width: 768px) {
+    margin-left: 10px;
+  }
 `;
 
 export const ForecastList = styled.ul`
@@ -457,4 +540,25 @@ export const StyledTableHeader = styled.th`
   border: 1px solid #ddd;
   background-color: #f2f2f2;
   text-align: center;
+`;
+
+export const FavoritesList = styled.ul`
+  list-style: none;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+`;
+
+export const FavoriteItem = styled.li`
+  margin-bottom: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: #007bff;
+  }
+`;
+
+export const FavoriteTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
